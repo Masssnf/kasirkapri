@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('IKLAN') }}
+            {{ __('IKLAN CETAK') }}
         </h2>
     </x-slot>
 
@@ -10,52 +10,59 @@
             <div class="gap-5 items-start flex">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        FORM INPUT IKLAN
+                        FORM INPUT IKLAN CETAK
                     </div>
                     <div>
-                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('iklan.store') }}">
+                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('iklancetak.store') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="kode_iklan"
+                                <label for="kode_iklancetak"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
                                 </label>
-                                <input type="text" name="kode_iklan"
+                                <input type="text" name="kode_iklancetak" value="{{ $kode_iklancetak ?? 'error' }}"
+                                    readonly
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
-                                <label for="type_iklan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
-                                </label>
-                                <input type="text" name="type_iklan"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                <label for="jenis_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="jenis_iklancetak" data-placeholder="Pilih Jenis Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Advertorial">Advertorial</option>
+                                    <option value="Display">Display</option>
+                                    <option value="Baris">Baris</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="jenis_Iklan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan
-                                </label>
-                                <input type="text" name="jenis_iklan"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                <label for="warna_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Warna Iklan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="warna_iklancetak" data-placeholder="Pilih Warna Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Black & White">Black & White</option>
+                                    <option value="Full Color">Full Color</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="warna_iklan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Warna Iklan
-                                </label>
-                                <input type="text" name="warna_iklan"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
-                            </div>
-                            <div class="mb-3">
-                                <label for="iklan_priangan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Iklan Priangan
-                                    TV
-                                </label>
-                                <input type="text" name="iklan_priangan"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
-                            </div>
-                            <div class="mb-3">
-                                <label for="harga_iklan"
+                                <label for="baris_iklancetak"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Iklan
                                 </label>
-                                <input type="text" name="harga_iklan"
+                                <input type="text" name="baris_iklancetak"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                            </div>
+                            <div class="mb-3">
+                                <label for="kolom_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Iklan
+                                </label>
+                                <input type="text" name="kolom_iklancetak"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Iklan
+                                </label>
+                                <input type="text" name="harga_iklancetak"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <button type="submit"
@@ -66,7 +73,7 @@
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        TABEL DATA IKLAN
+                        TABEL DATA IKLAN CETAK
                     </div>
                     <div>
                         <div class="relative overflow-x-auto">
@@ -81,16 +88,16 @@
                                             KODE IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            TYPE IKLAN
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-100">
                                             JENIS IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
                                             WARNA IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            IKLAN PRIANGAN TV
+                                            BARIS IKLAN
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 bg-gray-100">
+                                            KOLOM IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
                                             HARGA IKLAN
@@ -104,46 +111,47 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($iklan as $key => $i)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
+                                    @foreach ($iklancetak as $key => $i)
+                                        <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
                                                 class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $no++ }}
                                             </th>
                                             <td class="px-5 py-3">
-                                                {{ $i->kode_iklan }}
+                                                {{ $i->kode_iklancetak }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->type_iklan }}
+                                                {{ $i->jenis_iklancetak }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->jenis_iklan }}
+                                                {{ $i->warna_iklancetak }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->warna_iklan }}
+                                                {{ $i->baris_iklancetak ?? '-' }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->iklan_priangan }}
+                                                {{ $i->kolom_iklancetak ?? '-' }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                Rp{{ $i->harga_iklan }}
+                                                Rp{{ $i->harga_iklancetak }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
                                                     onclick="editSourceModal(this)" data-modal-target="sourceModal"
                                                     data-id="{{ $i->id }}"
-                                                    data-kode_iklan="{{ $i->kode_iklan }}"
-                                                    data-type_iklan="{{ $i->type_iklan }}"
-                                                    data-jenis_iklan="{{ $i->jenis_iklan }}"
-                                                    data-warna_iklan="{{ $i->warna_iklan }}"
-                                                    data-iklan_priangan="{{ $i->iklan_priangan }}"data-harga_iklan="{{ $i->harga_iklan }}">
+                                                    data-kode_iklancetak="{{ $i->kode_iklancetak }}"
+                                                    data-jenis_iklancetak="{{ $i->jenis_iklancetak }}"
+                                                    data-warna_iklancetak="{{ $i->warna_iklancetak }}"
+                                                    data-baris_iklancetak="{{ $i->baris_iklancetak }}"
+                                                    data-kolom_iklancetak="{{ $i->kolom_iklancetak }}"
+                                                    data-harga_iklancetak="{{ $i->harga_iklancetak }}">
                                                     <i class="fi fi-sr-file-edit"></i>
                                                 </button>
                                                 <button
                                                     class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return iklanDelete('{{ $i->id }}','{{ $i->kode_iklan }}')">
+                                                    onclick="return iklancetakDelete('{{ $i->id }}','{{ $i->kode_iklancetak }}')">
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
@@ -153,7 +161,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $iklan->links() }}
+                            {{ $iklancetak->links() }}
                         </div>
                     </div>
                 </div>
@@ -180,44 +188,56 @@
                     @csrf
                     <div class="flex flex-col p-4 space-y-3 max-h-[75vh] overflow-y-auto">
                         <div>
-                            <label for="kode_iklan" class="block mb-1 text-sm font-medium text-gray-900">Kode
-                                Iklan</label>
-                            <input type="text" id="kode_iklan" name="kode_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Kode">
+                            <label for="kode_iklancetak"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
+                            </label>
+                            <input type="text" id="edit_kode_iklancetak" name="kode_iklancetak"
+                                value="{{ $kode_iklancetak }}" readonly
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                         </div>
                         <div>
-                            <label for="type_iklan" class="block mb-1 text-sm font-medium text-gray-900">Type
-                                Iklan</label>
-                            <input type="text" id="type_iklan" name="type_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Type">
+                            <label for="jenis_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="jenis_iklancetak" id="edit_jenis_iklancetak" data-placeholder="Pilih Jenis Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Advertorial">Advertorial</option>
+                                    <option value="Display">Display</option>
+                                    <option value="Baris">Baris</option>
+                                </select>
                         </div>
                         <div>
-                            <label for="jenis_iklan" class="block mb-1 text-sm font-medium text-gray-900">Jenis
-                                Iklan</label>
-                            <input type="text" id="jenis_iklan" name="jenis_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Jenis">
+                            <label for="warna_iklancetak"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
+                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
+                                    *isi jika jenis iklan priangan tv
+                                </span>
+                                </label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="warna_iklancetak" id="edit_warna_iklancetak" data-placeholder="Pilih Type Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Black & White">Black & White</option>
+                                    <option value="Full Color">Full Color</option>
+                                </select>
                         </div>
                         <div>
-                            <label for="warna_iklan" class="block mb-1 text-sm font-medium text-gray-900">Warna
+                            <label for="baris_iklancetak" class="block mb-1 text-sm font-medium text-gray-900">Harga
                                 Iklan</label>
-                            <input type="text" id="warna_iklan" name="warna_iklan"
+                            <input type="text" id="edit_baris_iklancetak" name="baris_iklancetak"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Warna">
+                                placeholder="Masukan Harga">
                         </div>
                         <div>
-                            <label for="iklan_priangan" class="block mb-1 text-sm font-medium text-gray-900">Iklan
-                                Priangan Tv</label>
-                            <input type="text" id="iklan_priangan" name="iklan_priangan"
+                            <label for="kolom_iklancetak" class="block mb-1 text-sm font-medium text-gray-900">Harga
+                                Iklan</label>
+                            <input type="text" id="edit_kolomiklancetak" name="kolom_iklancetak"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Data">
+                                placeholder="Masukan Harga">
                         </div>
                         <div>
-                            <label for="harga_iklan" class="block mb-1 text-sm font-medium text-gray-900">Harga
+                            <label for="harga_iklancetak" class="block mb-1 text-sm font-medium text-gray-900">Harga
                                 Iklan</label>
-                            <input type="text" id="harga_iklan" name="harga_iklan"
+                            <input type="text" id="edit_harga_iklancetak" name="harga_iklancetak"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 placeholder="Masukan Harga">
                         </div>
@@ -242,39 +262,65 @@
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
+
+        // 1. Ambil Data dari Tombol
         const id = button.dataset.id;
-        const kode_iklan = button.dataset.kode_iklan;
-        const type_iklan = button.dataset.type_iklan;
-        const jenis_iklan = button.dataset.jenis_iklan;
-        const warna_iklan = button.dataset.warna_iklan;
-        const iklan_priangan = button.dataset.iklan_priangan;
-        const harga_iklan = button.dataset.harga_iklan;
-        let url = "{{ route('iklan.update', ':id') }}".replace(':id', id);
+        const kode = button.dataset.kode_iklancetak;
+        const jenis = button.dataset.jenis_iklancetak;
+        const warna = button.dataset.warna_iklancetak;
+        const baris = button.dataset.baris_iklancetak;
+        const kolom = button.dataset.kolom_iklancetak;
+        const harga = button.dataset.harga_iklancetak;
 
+        // 2. Update URL Action Form
+        // Mengubah route menjadi .../update/ID
+        let url = "{{ route('iklancetak.update', ':id') }}".replace(':id', id);
+        formModal.setAttribute('action', url);
+
+        // 3. Update Tampilan Modal (Judul & Tombol)
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `UPDATE ${kode_iklan}`;
+        document.getElementById('title_source').innerText = `UPDATE ${kode}`;
+        document.getElementById('formSourceButton').innerText = 'Simpan Perubahan';
 
-        document.getElementById('kode_iklan').value = kode_iklan;
-        document.getElementById('type_iklan').value = type_iklan;
-        document.getElementById('jenis_iklan').value = jenis_iklan;
-        document.getElementById('warna_iklan').value = warna_iklan;
-        document.getElementById('iklan_priangan').value = iklan_priangan;
-        document.getElementById('harga_iklan').value = harga_iklan;
+        // 4. Masukkan Data ke Input Field
+        document.getElementById('edit_kode_iklancetak').value = kode;
 
-        document.getElementById('formSourceButton').innerText = 'Simpan';
-        document.getElementById('formSourceModal').setAttribute('action', url);
-        let csrfToken = document.createElement('input');
-        csrfToken.setAttribute('type', 'hidden');
-        csrfToken.setAttribute('value', '{{ csrf_token() }}');
-        formModal.appendChild(csrfToken);
+        $('#edit_jenis_iklancetak').val(jenis).trigger('change');
 
-        let methodInput = document.createElement('input');
-        methodInput.setAttribute('type', 'hidden');
-        methodInput.setAttribute('name', '_method');
+        // Untuk Type Iklan
+        $('#edit_warna_iklancetak').val(warna).trigger('change');
+        document.getElementById('edit_baris_iklancetak').value = baris;
+        document.getElementById('edit_kolomiklancetak').value = kolom;
+        document.getElementById('edit_harga_iklancetak').value = harga;
+
+        // 5. Menangani METHOD PATCH (Agar tidak duplikat)
+        // Cek dulu, apakah input _method sudah ada?
+        let methodInput = formModal.querySelector('input[name="_method"]');
+        if (!methodInput) {
+            // Jika belum ada, baru kita buat
+            methodInput = document.createElement('input');
+            methodInput.setAttribute('type', 'hidden');
+            methodInput.setAttribute('name', '_method');
+            formModal.appendChild(methodInput);
+        }
+        // Isi valuenya dengan PATCH
         methodInput.setAttribute('value', 'PATCH');
-        formModal.appendChild(methodInput);
 
-        status.classList.toggle('hidden');
+        // 6. Menangani CSRF TOKEN (Penting!)
+        // Cek dulu apakah token sudah ada
+        let csrfInput = formModal.querySelector('input[name="_token"]');
+        if (!csrfInput) {
+            csrfInput = document.createElement('input');
+            csrfInput.setAttribute('type', 'hidden');
+            csrfInput.setAttribute('name', '_token'); // <--- INI WAJIB ADA
+            formModal.appendChild(csrfInput);
+        }
+        csrfInput.setAttribute('value', '{{ csrf_token() }}');
+
+        // 7. Buka Modal
+        // Gunakan remove('hidden') agar pasti terbuka
+        status.classList.remove('hidden');
+        status.classList.add('flex'); // Pastikan display flex agar modal ke tengah
     }
 
     const sourceModalClose = (button) => {
@@ -283,10 +329,10 @@
         status.classList.toggle('hidden');
     }
 
-    const iklanDelete = async (id, kode_iklan) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklan} ?`);
+    const iklancetakDelete = async (id, kode_iklancetak) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklancetak} ?`);
         if (tanya) {
-            await axios.post(`/iklan/${id}`, {
+            await axios.post(`/iklancetak/${id}`, {
                     '_method': 'DELETE',
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 })

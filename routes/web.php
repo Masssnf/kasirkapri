@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IklanCetakController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\IklanOnlineController;
 use App\Http\Controllers\ProfileController;
@@ -13,7 +14,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('iklan', IklanController::class)->middleware('auth');
+Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
 
 Route::middleware('auth')->group(function () {

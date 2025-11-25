@@ -19,29 +19,54 @@
                                 <label for="kode_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
                                 </label>
-                                <input type="text" name="kode_iklanonline"
+                                <input type="text" name="kode_iklanonline" value="{{ $kode_iklanonline ?? 'error' }}"
+                                    readonly
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
                                 <label for="jenis_iklanonline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan
-                                </label>
-                                <input type="text" name="jenis_iklanonline"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="jenis_iklanonline" data-placeholder="Pilih Jenis Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Artikel">Artikel</option>
+                                    <option value="Video">Video</option>
+                                    <option value="Priangan TV">Priangan TV</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="type_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
+                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
+                                    *isi jika jenis iklan priangan tv
+                                </span>
                                 </label>
-                                <input type="text" name="type_iklanonline"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="type_iklanonline" data-placeholder="Pilih Type Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Podcast">Podcast</option>
+                                    <option value="Iklan Display">Iklan Display</option>
+                                    <option value="Iklan Video">Iklan Video</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="portal_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal Iklan
+                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
+                                    *isi jika jenis iklan bukan priangan tv
+                                </span>
                                 </label>
-                                <input type="text" name="portal_iklanonline"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="portal_iklanonline" data-placeholder="Pilih Portal Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                                    <option value="Kab. Tasikmalaya">Kab. Tasikmalaya</option>
+                                    <option value="Ciamis">Ciamis</option>
+                                    <option value="Banjar">Banjar</option>
+                                    <option value="Pangandaran">Pangandaran</option>
+                                    <option value="Garut">Garut</option>
+                                    <option value="Sumedang">Sumedang</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="harga_iklanonline"
@@ -94,7 +119,7 @@
                                         $no = 1;
                                     @endphp
                                     @foreach ($iklanonline as $key => $i)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
+                                        <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
                                                 class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -107,13 +132,13 @@
                                                 {{ $i->jenis_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->type_iklanonline }}
+                                                {{ $i->type_iklanonline ?? '-' }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->portal_iklanonline }}
+                                                {{ $i->portal_iklanonline ?? '-' }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                Rp{{ $i->harga_iklan }}
+                                                Rp{{ $i->harga_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
@@ -166,44 +191,62 @@
                     @csrf
                     <div class="flex flex-col p-4 space-y-3 max-h-[75vh] overflow-y-auto">
                         <div>
-                            <label for="kode_iklan" class="block mb-1 text-sm font-medium text-gray-900">Kode
-                                Iklan</label>
-                            <input type="text" id="kode_iklan" name="kode_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Kode">
+                            <label for="kode_iklanonline"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
+                            </label>
+                            <input type="text" id="edit_kode_iklanonline" name="kode_iklanonline"
+                                value="{{ $kode_iklanonline }}" readonly
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                         </div>
                         <div>
-                            <label for="type_iklan" class="block mb-1 text-sm font-medium text-gray-900">Type
-                                Iklan</label>
-                            <input type="text" id="type_iklan" name="type_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Type">
+                            <label for="jenis_iklanonline"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="jenis_iklanonline" id="edit_jenis_iklanonline" data-placeholder="Pilih Jenis Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Artikel">Artikel</option>
+                                    <option value="Video">Video</option>
+                                    <option value="Priangan TV">Priangan TV</option>
+                                </select>
                         </div>
                         <div>
-                            <label for="jenis_iklan" class="block mb-1 text-sm font-medium text-gray-900">Jenis
-                                Iklan</label>
-                            <input type="text" id="jenis_iklan" name="jenis_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Jenis">
+                            <label for="type_iklanonline"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
+                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
+                                    *isi jika jenis iklan priangan tv
+                                </span>
+                                </label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="type_iklanonline" id="edit_type_iklanonline" data-placeholder="Pilih Type Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Podcast">Podcast</option>
+                                    <option value="Iklan Display">Iklan Display</option>
+                                    <option value="Iklan Video">Iklan Video</option>
+                                </select>
                         </div>
                         <div>
-                            <label for="warna_iklan" class="block mb-1 text-sm font-medium text-gray-900">Warna
-                                Iklan</label>
-                            <input type="text" id="warna_iklan" name="warna_iklan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Warna">
+                            <label for="portal_iklanonline"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal Iklan
+                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
+                                    *isi jika jenis iklan bukan priangan tv
+                                </span>
+                                </label>
+                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
+                                    name="portal_iklanonline" id="edit_portal_iklanonline" data-placeholder="Pilih Portal Iklan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                                    <option value="Kab. Tasikmalaya">Kab. Tasikmalaya</option>
+                                    <option value="Ciamis">Ciamis</option>
+                                    <option value="Banjar">Banjar</option>
+                                    <option value="Pangandaran">Pangandaran</option>
+                                    <option value="Garut">Garut</option>
+                                    <option value="Sumedang">Sumedang</option>
+                                </select>
                         </div>
                         <div>
-                            <label for="iklan_priangan" class="block mb-1 text-sm font-medium text-gray-900">Iklan
-                                Priangan Tv</label>
-                            <input type="text" id="iklan_priangan" name="iklan_priangan"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-                                placeholder="Masukan Data">
-                        </div>
-                        <div>
-                            <label for="harga_iklan" class="block mb-1 text-sm font-medium text-gray-900">Harga
+                            <label for="harga_iklanonline" class="block mb-1 text-sm font-medium text-gray-900">Harga
                                 Iklan</label>
-                            <input type="text" id="harga_iklan" name="harga_iklan"
+                            <input type="text" id="edit_harga_iklanonline" name="harga_iklanonline"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                 placeholder="Masukan Harga">
                         </div>
@@ -224,43 +267,69 @@
         </div>
     </div>
 </x-app-layout>
-{{-- <script>
+<script>
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
+
+        // 1. Ambil Data dari Tombol
         const id = button.dataset.id;
-        const kode_iklan = button.dataset.kode_iklan;
-        const type_iklan = button.dataset.type_iklan;
-        const jenis_iklan = button.dataset.jenis_iklan;
-        const warna_iklan = button.dataset.warna_iklan;
-        const iklan_priangan = button.dataset.iklan_priangan;
-        const harga_iklan = button.dataset.harga_iklan;
-        let url = "{{ route('iklan.update', ':id') }}".replace(':id', id);
+        const kode = button.dataset.kode_iklanonline;
+        const type = button.dataset.type_iklanonline;
+        const jenis = button.dataset.jenis_iklanonline;
+        const portal = button.dataset.portal_iklanonline;
+        const harga = button.dataset.harga_iklanonline;
 
+        // 2. Update URL Action Form
+        // Mengubah route menjadi .../update/ID
+        let url = "{{ route('iklanonline.update', ':id') }}".replace(':id', id);
+        formModal.setAttribute('action', url);
+
+        // 3. Update Tampilan Modal (Judul & Tombol)
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `UPDATE ${kode_iklan}`;
+        document.getElementById('title_source').innerText = `UPDATE ${kode}`;
+        document.getElementById('formSourceButton').innerText = 'Simpan Perubahan';
 
-        document.getElementById('kode_iklan').value = kode_iklan;
-        document.getElementById('type_iklan').value = type_iklan;
-        document.getElementById('jenis_iklan').value = jenis_iklan;
-        document.getElementById('warna_iklan').value = warna_iklan;
-        document.getElementById('iklan_priangan').value = iklan_priangan;
-        document.getElementById('harga_iklan').value = harga_iklan;
+        // 4. Masukkan Data ke Input Field
+        document.getElementById('edit_kode_iklanonline').value = kode;
 
-        document.getElementById('formSourceButton').innerText = 'Simpan';
-        document.getElementById('formSourceModal').setAttribute('action', url);
-        let csrfToken = document.createElement('input');
-        csrfToken.setAttribute('type', 'hidden');
-        csrfToken.setAttribute('value', '{{ csrf_token() }}');
-        formModal.appendChild(csrfToken);
+        $('#edit_jenis_iklanonline').val(jenis).trigger('change');
 
-        let methodInput = document.createElement('input');
-        methodInput.setAttribute('type', 'hidden');
-        methodInput.setAttribute('name', '_method');
+        // Untuk Type Iklan
+        $('#edit_type_iklanonline').val(type).trigger('change');
+
+        // Untuk Portal Iklan
+        $('#edit_portal_iklanonline').val(portal).trigger('change');
+        document.getElementById('edit_harga_iklanonline').value = harga;
+
+        // 5. Menangani METHOD PATCH (Agar tidak duplikat)
+        // Cek dulu, apakah input _method sudah ada?
+        let methodInput = formModal.querySelector('input[name="_method"]');
+        if (!methodInput) {
+            // Jika belum ada, baru kita buat
+            methodInput = document.createElement('input');
+            methodInput.setAttribute('type', 'hidden');
+            methodInput.setAttribute('name', '_method');
+            formModal.appendChild(methodInput);
+        }
+        // Isi valuenya dengan PATCH
         methodInput.setAttribute('value', 'PATCH');
-        formModal.appendChild(methodInput);
 
-        status.classList.toggle('hidden');
+        // 6. Menangani CSRF TOKEN (Penting!)
+        // Cek dulu apakah token sudah ada
+        let csrfInput = formModal.querySelector('input[name="_token"]');
+        if (!csrfInput) {
+            csrfInput = document.createElement('input');
+            csrfInput.setAttribute('type', 'hidden');
+            csrfInput.setAttribute('name', '_token'); // <--- INI WAJIB ADA
+            formModal.appendChild(csrfInput);
+        }
+        csrfInput.setAttribute('value', '{{ csrf_token() }}');
+
+        // 7. Buka Modal
+        // Gunakan remove('hidden') agar pasti terbuka
+        status.classList.remove('hidden');
+        status.classList.add('flex'); // Pastikan display flex agar modal ke tengah
     }
 
     const sourceModalClose = (button) => {
@@ -269,10 +338,10 @@
         status.classList.toggle('hidden');
     }
 
-    const iklanDelete = async (id, kode_iklan) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklan} ?`);
+    const iklanonlineDelete = async (id, kode_iklanonline) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklanonline} ?`);
         if (tanya) {
-            await axios.post(`/iklan/${id}`, {
+            await axios.post(`/iklanonline/${id}`, {
                     '_method': 'DELETE',
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 })
@@ -287,4 +356,4 @@
                 });
         }
     }
-</script> --}}
+</script>

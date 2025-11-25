@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('iklan', function (Blueprint $table) {
+        Schema::create('transaksiiklanonline', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_iklan');
-            $table->string('type_iklan');
-            $table->string('jenis_iklan');
-            $table->string('warna_iklan');
-            $table->string('iklan_priangan');
-            $table->integer('harga_iklan');
+            $table->id();
+            $table->id();
+            $table->id();
+            $table->id();
+            $table->id();
+            $table->id();
+            $table->id();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('iklan');
+        Schema::dropIfExists('transaksiiklanonline');
     }
 };
