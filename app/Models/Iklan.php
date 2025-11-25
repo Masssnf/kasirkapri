@@ -9,6 +9,7 @@ class Iklan extends Model
     protected $table = 'iklan';
 
     protected $fillable = [
+        'kode_iklan',
         'type_iklan',
         'jenis_iklan',
         'warna_iklan',

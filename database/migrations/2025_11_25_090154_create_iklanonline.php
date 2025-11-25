@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('iklan', function (Blueprint $table) {
+        Schema::create('iklanonline', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_iklan');
-            $table->string('type_iklan');
-            $table->string('jenis_iklan');
-            $table->string('warna_iklan');
-            $table->string('iklan_priangan');
-            $table->integer('harga_iklan');
+            $table->string('kode_iklanonline')->unique();
+            $table->string('jenis_iklanonline');
+            $table->string('type_iklanonline');
+            $table->string('portal_iklanonline');
+            $table->integer('harga_iklanonline');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('iklan');
+        Schema::dropIfExists('iklanonline');
     }
 };

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('IKLAN') }}
+            {{ __('IKLAN ONLINE') }}
         </h2>
     </x-slot>
 
@@ -10,52 +10,44 @@
             <div class="gap-5 items-start flex">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        FORM INPUT IKLAN
+                        FORM INPUT IKLAN ONLINE
                     </div>
                     <div>
-                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('iklan.store') }}">
+                        <form class="max-w-sm mx-auto" method="POST" action="{{ route('iklanonline.store') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="kode_iklan"
+                                <label for="kode_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
                                 </label>
-                                <input type="text" name="kode_iklan"
+                                <input type="text" name="kode_iklanonline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
-                                <label for="type_iklan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
-                                </label>
-                                <input type="text" name="type_iklan"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
-                            </div>
-                            <div class="mb-3">
-                                <label for="jenis_Iklan"
+                                <label for="jenis_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan
                                 </label>
-                                <input type="text" name="jenis_iklan"
+                                <input type="text" name="jenis_iklanonline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
-                                <label for="warna_iklan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Warna Iklan
+                                <label for="type_iklanonline"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
                                 </label>
-                                <input type="text" name="warna_iklan"
+                                <input type="text" name="type_iklanonline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
-                                <label for="iklan_priangan"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Iklan Priangan
-                                    TV
+                                <label for="portal_iklanonline"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal Iklan
                                 </label>
-                                <input type="text" name="iklan_priangan"
+                                <input type="text" name="portal_iklanonline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
-                                <label for="harga_iklan"
+                                <label for="harga_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Iklan
                                 </label>
-                                <input type="text" name="harga_iklan"
+                                <input type="text" name="harga_iklanonline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <button type="submit"
@@ -66,7 +58,7 @@
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
-                        TABEL DATA IKLAN
+                        TABEL DATA IKLAN ONLINE
                     </div>
                     <div>
                         <div class="relative overflow-x-auto">
@@ -81,16 +73,13 @@
                                             KODE IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            TYPE IKLAN
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-100">
                                             JENIS IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            WARNA IKLAN
+                                            TYPE IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            IKLAN PRIANGAN TV
+                                            PORTAL IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
                                             HARGA IKLAN
@@ -104,7 +93,7 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($iklan as $key => $i)
+                                    @foreach ($iklanonline as $key => $i)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                             align="center">
                                             <th scope="row"
@@ -112,19 +101,16 @@
                                                 {{ $no++ }}
                                             </th>
                                             <td class="px-5 py-3">
-                                                {{ $i->kode_iklan }}
+                                                {{ $i->kode_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->type_iklan }}
+                                                {{ $i->jenis_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->jenis_iklan }}
+                                                {{ $i->type_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->warna_iklan }}
-                                            </td>
-                                            <td class="px-5 py-3">
-                                                {{ $i->iklan_priangan }}
+                                                {{ $i->portal_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 Rp{{ $i->harga_iklan }}
@@ -134,16 +120,16 @@
                                                     class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
                                                     onclick="editSourceModal(this)" data-modal-target="sourceModal"
                                                     data-id="{{ $i->id }}"
-                                                    data-kode_iklan="{{ $i->kode_iklan }}"
-                                                    data-type_iklan="{{ $i->type_iklan }}"
-                                                    data-jenis_iklan="{{ $i->jenis_iklan }}"
-                                                    data-warna_iklan="{{ $i->warna_iklan }}"
-                                                    data-iklan_priangan="{{ $i->iklan_priangan }}"data-harga_iklan="{{ $i->harga_iklan }}">
+                                                    data-kode_iklanonline="{{ $i->kode_iklanonline }}"
+                                                    data-jenis_iklanonline="{{ $i->jenis_iklanonline }}"
+                                                    data-type_iklanonline="{{ $i->type_iklanonline }}"
+                                                    data-portal_iklanonline="{{ $i->portal_iklanonline }}"
+                                                    data-harga_iklanonline="{{ $i->harga_iklanonline }}">
                                                     <i class="fi fi-sr-file-edit"></i>
                                                 </button>
                                                 <button
                                                     class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return iklanDelete('{{ $i->id }}','{{ $i->kode_iklan }}')">
+                                                    onclick="return iklanonlineDelete('{{ $i->id }}','{{ $i->kode_iklanonline }}')">
                                                     <i class="fi fi-sr-delete-document"></i>
                                                 </button>
                                             </td>
@@ -153,7 +139,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $iklan->links() }}
+                            {{ $iklanonline->links() }}
                         </div>
                     </div>
                 </div>
@@ -238,7 +224,7 @@
         </div>
     </div>
 </x-app-layout>
-<script>
+{{-- <script>
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
@@ -301,4 +287,4 @@
                 });
         }
     }
-</script>
+</script> --}}
