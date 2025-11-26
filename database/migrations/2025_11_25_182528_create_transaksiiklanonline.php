@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('transaksiiklanonline', function (Blueprint $table) {
             $table->id();
-            $table->id();
-            $table->id();
-            $table->id();
-            $table->id();
-            $table->id();
-            $table->id();
-            $table->id();
+            $table->string('nofakturonline');
+            $table->string('namapemasang');
+            $table->string('alamatpemasang');
+            $table->string('notelppemasang');
+            $table->date('tglmuat');
+            $table->string('namasales');
+            $table->string('id_iklanonline');
+            $table->integer('harga');
+            $table->integer('intensif');
+            $table->integer('diskon');
+            $table->integer('jumlahbayar');
             $table->timestamps();
         });
     }

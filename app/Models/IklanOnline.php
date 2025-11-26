@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class IklanOnline extends Model
 {
+    use HasFactory;
+
     protected $table = 'iklanonline';
 
     protected $fillable = [
@@ -15,6 +18,11 @@ class IklanOnline extends Model
         'portal_iklanonline',
         'harga_iklanonline',
     ];
+
+    public function transaksiiklanonline()
+    {
+        return $this->hasMany(Transaksiiklanonline::class, 'id_iklanonline');
+    }
 
     public static function createCode(){
         $latestCode = self::orderBy('kode_iklanonline','desc')->value('kode_iklanonline');

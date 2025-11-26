@@ -4,6 +4,7 @@ use App\Http\Controllers\IklanCetakController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\IklanOnlineController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransaksiIklanOnlineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,11 @@ Route::get('/dashboard', function () {
 
 Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
+Route::resource('transaksiiklanonline', TransaksiIklanOnlineController::class)->middleware('auth');
+Route::get('/transaksionline/create', [TransaksiiklanonlineController::class, 'create'])
+    ->name('transaksiiklanonline.create');
+Route::post('/transaksionline/store', [TransaksiiklanonlineController::class, 'store'])
+    ->name('transaksiiklanonline.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,4 +31,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
