@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transaksiiklanonline', function (Blueprint $table) {
             $table->id();
             $table->string('nofakturonline');
+            $table->date('tgltransaksionline');
             $table->string('namapemasang');
             $table->string('alamatpemasang');
             $table->string('notelppemasang');

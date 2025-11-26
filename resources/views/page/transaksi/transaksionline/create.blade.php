@@ -24,6 +24,12 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                         <div class="mb-5 w-full">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
+                                Transaksi</label>
+                            <input type="date" name="tgltransaksionline" required
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                        </div>
+                        <div class="mb-5 w-full">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                                 Pemasang</label>
                             <input type="text" name="namapemasang" required placeholder="Nama Pemasang"
@@ -74,17 +80,16 @@
                             <input type="text" id="auto_type" readonly placeholder="Otomatis..."
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-not-allowed" />
                         </div>
-
-                        <div class="mb-5 w-full">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                Muat</label>
-                            <input type="date" name="tglmuat" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
-                        </div>
                         <div class="mb-5 w-full">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal
                                 Iklan</label>
                             <input type="text" id="auto_portal" readonly placeholder="Otomatis..."
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
+                                Muat</label>
+                            <input type="date" name="tglmuat" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                     </div>
@@ -199,6 +204,7 @@
 
             const inputJenis = document.getElementById('auto_jenis');
             const inputType = document.getElementById('auto_type');
+            const inputPortal = document.getElementById('auto_portal');
             const inputHarga = document.getElementById('auto_harga');
 
             const inputIntensif = document.getElementById('intensif');
@@ -222,6 +228,7 @@
 
                 inputJenis.value = selectedOption.dataset.jenis;
                 inputType.value = selectedOption.dataset.type;
+                inputPortal.value = selectedOption.dataset.portal;
 
                 // Format harga dari database (misal: 1000000 jadi 1.000.000)
                 let hargaDb = parseFloat(selectedOption.dataset.harga);

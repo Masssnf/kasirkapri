@@ -29,6 +29,9 @@
                                         NO FAKTUR
                                     </th>
                                     <th scope="col" class="px-4 py-3">
+                                        TANGGAL TRANSAKSI
+                                    </th>
+                                    <th scope="col" class="px-4 py-3">
                                         KODE IKLAN
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -59,9 +62,6 @@
                                         HARGA
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        INTENSIF
-                                    </th>
-                                    <th scope="col" class="px-4 py-3">
                                         DISKON
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -86,6 +86,9 @@
                                         </th>
                                         <td class="px-5 py-5">
                                             {{ $t->nofakturonline }}
+                                        </td>
+                                        <td class="px-5 py-5">
+                                            {{ $t->tgltransaksionline }}
                                         </td>
                                         <td class="px-auto py-auto">
                                             {{ $t->iklanonline->kode_iklanonline }}
@@ -116,11 +119,7 @@
                                         </td>
                                         <td class="px-auto py-auto">
                                             {{ $t->iklanonline->harga_iklanonline }}
-                                        </td>
-                                        <td class="px-auto py-auto">
-                                            {{ $t->intensif }}
-                                        </td>
-                                        <td class="px-auto py-auto">
+                                        </td><td class="px-auto py-auto">
                                             {{ $t->diskon }}
                                         </td>
                                         <td class="px-auto py-auto">

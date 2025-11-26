@@ -39,6 +39,7 @@ class TransaksiIklanOnlineController extends Controller
     {
         $request->validate([
             'nofakturonline' => 'required',
+            'tgltransaksionline' => 'required',
             'namapemasang'   => 'required',
             'alamatpemasang' => 'required',
             'notelppemasang' => 'required',
@@ -84,6 +85,7 @@ class TransaksiIklanOnlineController extends Controller
         // 4. SIMPAN KE DATABASE
         Transaksiiklanonline::create([
             'nofakturonline'    => $request->nofakturonline,
+            'tgltransaksionline'    => $request->tgltransaksionline,
             'namapemasang'      => $request->namapemasang,
             'alamatpemasang'    => $request->alamatpemasang,
             'notelppemasang'    => $request->notelppemasang,

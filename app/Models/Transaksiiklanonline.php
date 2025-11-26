@@ -11,6 +11,7 @@ class Transaksiiklanonline extends Model
 
     protected $fillable = [
         'nofakturonline',
+        'tgltransaksionline',
         'namapemasang',
         'alamatpemasang',
         'notelppemasang',
