@@ -142,6 +142,8 @@ class TransaksiIklanOnlineController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Transaksiiklanonline::findOrFail($id);
+        $data->delete();
+        return back()->with('message_delete', 'Data Paket Sudah di Hapus');
     }
 }

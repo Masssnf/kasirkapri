@@ -159,7 +159,7 @@
                     </div>
 
                     <div class="flex justify-between mt-5">
-                        <a
+                        <a href="{{ route('transaksiiklanonline.index') }}"
                             class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center">Batal</a>
                         <button type="submit"
                             class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-12 py-2.5 text-center">Simpan
