@@ -34,8 +34,7 @@ class IklanOnlineController extends Controller
         $request->validate([
             'kode_iklanonline'   => 'required|unique:iklanonline,kode_iklanonline',
             'jenis_iklanonline' => 'required',
-            'type_iklanonline'  => 'nullable',
-            'portal_iklanonline' => 'nullable',
+            'portal_iklanonline' => 'required',
             'harga_iklanonline' => 'required|numeric',
         ]);
 
@@ -44,7 +43,6 @@ class IklanOnlineController extends Controller
             // PENTING: Panggil function createCode() dari Model di sini
             'kode_iklanonline'   => $request->input('kode_iklanonline'),
             'jenis_iklanonline'  => $request->input('jenis_iklanonline'),
-            'type_iklanonline'   => $request->input('type_iklanonline'),
             'portal_iklanonline' => $request->input('portal_iklanonline'),
             'harga_iklanonline'  => $request->input('harga_iklanonline'),
         ];
@@ -80,7 +78,6 @@ class IklanOnlineController extends Controller
         $data = [
             'kode_iklanonline' => $request->input('kode_iklanonline'),
             'jenis_iklanonline' => $request->input('jenis_iklanonline'),
-            'type_iklanonline' => $request->input('type_iklanonline'),
             'portal_iklanonline' => $request->input('portal_iklanonline'),
             'harga_iklanonline' => $request->input('harga_iklanonline'),
         ];

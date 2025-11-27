@@ -36,15 +36,15 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('iklanonline.index')">
-                                    {{ __('IKLAN ONLINE') }}
+                                <x-dropdown-link :href="route('iklancetak.index')">
+                                    {{ __('Iklan Cetak') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('iklancetak.index')">
-                                    {{ __('IKLAN CETAK') }}
+                                <x-dropdown-link :href="route('iklanonline.index')">
+                                    {{ __('Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('iklanpriangan.index')">
-                                    {{ __('IKLAN PRIANGAN TV') }}
+                                    {{ __('Iklan Priangan Tv') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
@@ -68,11 +68,11 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('iklanonline.index')">
+                                <x-dropdown-link :href="route('iklancetak.index')">
                                     {{ __('Transaksi Iklan Cetak') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('iklancetak.index')">
+                                <x-dropdown-link :href="route('iklanonline.index')">
                                     {{ __('Transaksi Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('transaksipriangan.index')">

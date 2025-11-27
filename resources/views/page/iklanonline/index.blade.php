@@ -31,41 +31,23 @@
                                     <option value="">Pilih...</option>
                                     <option value="Artikel">Artikel</option>
                                     <option value="Video">Video</option>
-                                    <option value="Priangan TV">Priangan TV</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="type_iklanonline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
-                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
-                                    *isi jika jenis iklan priangan tv
-                                </span>
-                                </label>
-                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                    name="type_iklanonline" data-placeholder="Pilih Type Iklan">
-                                    <option value="">Pilih...</option>
-                                    <option value="Podcast">Podcast</option>
-                                    <option value="Iklan Display">Iklan Display</option>
-                                    <option value="Iklan Video">Iklan Video</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="portal_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal Iklan
-                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
-                                    *isi jika jenis iklan bukan priangan tv
-                                </span>
                                 </label>
                                 <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                     name="portal_iklanonline" data-placeholder="Pilih Portal Iklan">
                                     <option value="">Pilih...</option>
-                                    <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
-                                    <option value="Kab. Tasikmalaya">Kab. Tasikmalaya</option>
-                                    <option value="Ciamis">Ciamis</option>
-                                    <option value="Banjar">Banjar</option>
-                                    <option value="Pangandaran">Pangandaran</option>
-                                    <option value="Garut">Garut</option>
-                                    <option value="Sumedang">Sumedang</option>
+                                    <option value="Kabar Tasikmalaya">KabarTasikmalaya</option>
+                                    <option value="Kabar Singaparna">Kabar Singaparna</option>
+                                    <option value="Kabar Ciamis">Kabar Ciamis</option>
+                                    <option value="Kabar Banjar">Kabar Banjar</option>
+                                    <option value="Kabar Pangandaran">Kabar Pangandaran</option>
+                                    <option value="Kabar Garut">Kabar Garut</option>
+                                    <option value="Kabar Bandung">Kabar Bandung</option>
+                                    <option value="Kabar Sumedang">Kabar Sumedang</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -101,9 +83,6 @@
                                             JENIS IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
-                                            TYPE IKLAN
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-100">
                                             PORTAL IKLAN
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-100">
@@ -132,13 +111,10 @@
                                                 {{ $i->jenis_iklanonline }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                {{ $i->type_iklanonline ?? '-' }}
-                                            </td>
-                                            <td class="px-5 py-3">
                                                 {{ $i->portal_iklanonline ?? '-' }}
                                             </td>
                                             <td class="px-5 py-3">
-                                                Rp{{ $i->harga_iklanonline }}
+                                                Rp {{ number_format($i->harga_iklanonline, 0, ',', '.') }}
                                             </td>
                                             <td class="px-5 py-3">
                                                 <button type="button"
@@ -147,7 +123,6 @@
                                                     data-id="{{ $i->id }}"
                                                     data-kode_iklanonline="{{ $i->kode_iklanonline }}"
                                                     data-jenis_iklanonline="{{ $i->jenis_iklanonline }}"
-                                                    data-type_iklanonline="{{ $i->type_iklanonline }}"
                                                     data-portal_iklanonline="{{ $i->portal_iklanonline }}"
                                                     data-harga_iklanonline="{{ $i->harga_iklanonline }}">
                                                     <i class="fi fi-sr-file-edit"></i>
@@ -210,37 +185,20 @@
                                 </select>
                         </div>
                         <div>
-                            <label for="type_iklanonline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type Iklan
-                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
-                                    *isi jika jenis iklan priangan tv
-                                </span>
-                                </label>
-                                <select class="js-example-placeholder-single js-states form-control w-full m-6"
-                                    name="type_iklanonline" id="edit_type_iklanonline" data-placeholder="Pilih Type Iklan">
-                                    <option value="">Pilih...</option>
-                                    <option value="Podcast">Podcast</option>
-                                    <option value="Iklan Display">Iklan Display</option>
-                                    <option value="Iklan Video">Iklan Video</option>
-                                </select>
-                        </div>
-                        <div>
                             <label for="portal_iklanonline"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portal Iklan
-                                <span class="ml-1 text-xs text-red-500 font-normal dark:text-gray-400">
-                                    *isi jika jenis iklan bukan priangan tv
-                                </span>
                                 </label>
                                 <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                     name="portal_iklanonline" id="edit_portal_iklanonline" data-placeholder="Pilih Portal Iklan">
                                     <option value="">Pilih...</option>
-                                    <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
-                                    <option value="Kab. Tasikmalaya">Kab. Tasikmalaya</option>
-                                    <option value="Ciamis">Ciamis</option>
-                                    <option value="Banjar">Banjar</option>
-                                    <option value="Pangandaran">Pangandaran</option>
-                                    <option value="Garut">Garut</option>
-                                    <option value="Sumedang">Sumedang</option>
+                                    <option value="Kabar Tasikmalaya">Kabar Tasikmalaya</option>
+                                    <option value="Kabar Singaparna">Kabar Singaparna</option>
+                                    <option value="Kabar Ciamis">Kabar Ciamis</option>
+                                    <option value="Kabar Banjar">Kabar Banjar</option>
+                                    <option value="Kabar Pangandaran">Kabar Pangandaran</option>
+                                    <option value="Kabar Garut">Kabar Garut</option>
+                                    <option value="Kabar Bandung">Kabar Bandung</option>
+                                    <option value="Kabar Sumedang">Kabar Sumedang</option>
                                 </select>
                         </div>
                         <div>
@@ -275,7 +233,6 @@
         // 1. Ambil Data dari Tombol
         const id = button.dataset.id;
         const kode = button.dataset.kode_iklanonline;
-        const type = button.dataset.type_iklanonline;
         const jenis = button.dataset.jenis_iklanonline;
         const portal = button.dataset.portal_iklanonline;
         const harga = button.dataset.harga_iklanonline;
@@ -294,9 +251,6 @@
         document.getElementById('edit_kode_iklanonline').value = kode;
 
         $('#edit_jenis_iklanonline').val(jenis).trigger('change');
-
-        // Untuk Type Iklan
-        $('#edit_type_iklanonline').val(type).trigger('change');
 
         // Untuk Portal Iklan
         $('#edit_portal_iklanonline').val(portal).trigger('change');

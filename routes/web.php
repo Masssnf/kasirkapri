@@ -7,6 +7,7 @@ use App\Http\Controllers\IklanPrianganController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiIklanOnlineController;
 use App\Http\Controllers\TransaksiIklanPrianganController;
+use App\Http\Controllers\TransaksiOnlineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,12 +21,8 @@ Route::get('/dashboard', function () {
 Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
 Route::resource('iklanpriangan', IklanPrianganController::class)->middleware('auth');
-Route::resource('transaksiiklanonline', TransaksiIklanOnlineController::class)->middleware('auth');
+Route::resource('transaksionline', TransaksiOnlineController::class)->middleware('auth');
 Route::resource('transaksipriangan', TransaksiIklanPrianganController::class)->middleware('auth');
-Route::get('/transaksionline/create', [TransaksiiklanonlineController::class, 'create'])
-    ->name('transaksiiklanonline.create');
-Route::post('/transaksionline/store', [TransaksiiklanonlineController::class, 'store'])
-    ->name('transaksiiklanonline.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

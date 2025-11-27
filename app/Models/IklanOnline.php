@@ -14,15 +14,14 @@ class IklanOnline extends Model
     protected $fillable = [
         'kode_iklanonline',
         'jenis_iklanonline',
-        'type_iklanonline',
         'portal_iklanonline',
         'harga_iklanonline',
     ];
 
-    public function transaksiiklanonline()
-    {
-        return $this->hasMany(Transaksiiklanonline::class, 'id_iklanonline');
-    }
+    // public function transaksiiklanonline()
+    // {
+    //     return $this->hasMany(Transaksiiklanonline::class, 'id_iklanonline');
+    // }
 
     public static function createCode(){
         $latestCode = self::orderBy('kode_iklanonline','desc')->value('kode_iklanonline');

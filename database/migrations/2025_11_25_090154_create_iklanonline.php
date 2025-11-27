@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_iklanonline')->unique();
             $table->string('jenis_iklanonline');
-            $table->string('type_iklanonline')->nullable();
-            $table->string('portal_iklanonline')->nullable();
+            $table->string('portal_iklanonline');
             $table->integer('harga_iklanonline');
             $table->timestamps();
         });
