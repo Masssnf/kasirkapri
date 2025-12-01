@@ -18,10 +18,10 @@ class IklanOnline extends Model
         'harga_iklanonline',
     ];
 
-    // public function transaksiiklanonline()
-    // {
-    //     return $this->hasMany(Transaksiiklanonline::class, 'id_iklanonline');
-    // }
+    public function transaksionline()
+    {
+        return $this->hasMany(Transaksionline::class, 'id_iklanonline');
+    }
 
     public static function createCode(){
         $latestCode = self::orderBy('kode_iklanonline','desc')->value('kode_iklanonline');

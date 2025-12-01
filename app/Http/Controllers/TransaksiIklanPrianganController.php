@@ -13,13 +13,19 @@ class TransaksiIklanPrianganController extends Controller
      */
     public function index()
     {
-        $transaksipriangan = TransaksiPriangan::paginate(5);
+        // 1. Ambil Data Transaksi (Untuk Tabel)
+        // Kita gunakan with() untuk mengambil nama jenis iklan dari relasi
+        // latest() agar data terbaru muncul paling atas
+        $transaksipriangan = TransaksiPriangan::with('iklanpriangan')
+            ->latest()
+            ->paginate(10);
+
+        // 2. Ambil Data Master Iklan (Untuk Dropdown di Modal Edit)
+        // Tanpa ini, dropdown di modal edit akan kosong/error
         $iklanpriangan = IklanPriangan::all();
 
-        return view('page.transaksipriangan.index')->with([
-            'transaksipriangan' => $transaksipriangan,
-            'iklanpriangan' => $iklanpriangan,
-        ]);
+        // 3. Kirim ke View
+        return view('page.transaksipriangan.index', compact('transaksipriangan', 'iklanpriangan'));
     }
 
     /**
@@ -30,6 +36,17 @@ class TransaksiIklanPrianganController extends Controller
         $iklanpriangan = IklanPriangan::all();
         $nofakturpriangan = TransaksiPriangan::createCode();
         return view('page.transaksipriangan.create', compact('nofakturpriangan', 'iklanpriangan'));
+    }
+
+    public function cetak($id)
+    {
+        // 1. Ambil data transaksi berdasarkan ID
+        // Gunakan 'with' untuk mengambil data relasi jenis iklan juga
+        $transaksi =TransaksiPriangan::with('iklanpriangan')->findOrFail($id);
+
+        // 2. Tampilkan view cetak
+        // Pastikan path view sesuai dengan struktur folder Anda
+        return view('page.transaksipriangan.cetak', compact('transaksi'));
     }
 
     /**

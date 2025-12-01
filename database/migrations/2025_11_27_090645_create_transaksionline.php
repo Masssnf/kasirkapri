@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('nama_pemasangonline');
             $table->string('alamat_pemasangonline');
             $table->string('id_iklanonline');
+            $table->string('portal_iklanonline');
             $table->string('sales_iklanonline');
             $table->date('tanggal_muatiklanonline');
             $table->integer('insentif_transaksionline');
             $table->integer('diskon_transaksionline');
             $table->integer('komisi_transaksionline');
             $table->integer('jumlahbayar_transaksionline');
+            $table->integer('totaltagihan_transaksionline');
             $table->integer('piutang_transaksionline');
             $table->timestamps();
         });
