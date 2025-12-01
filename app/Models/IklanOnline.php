@@ -16,6 +16,11 @@ class IklanOnline extends Model
         'jenis_iklanonline',
     ];
 
+    public function transaksionline()
+    {
+        return $this->hasMany(TransaksiOnline::class, 'id_iklanonline');
+    }
+
     public static function createCode(){
         $latestCode = self::orderBy('kode_iklanonline','desc')->value('kode_iklanonline');
         $latestCodeNumber = intval(substr($latestCode,3));

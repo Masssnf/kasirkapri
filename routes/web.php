@@ -28,6 +28,10 @@ Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth')
 Route::resource('transaksipriangan', TransaksiIklanPrianganController::class)->middleware('auth');
 Route::get('/transaksipriangan/{id}/cetak', [TransaksiIklanPrianganController::class, 'cetak'])
     ->name('transaksipriangan.cetak');
+    
+Route::resource('transaksionline', TransaksiOnlineController::class)->middleware('auth');
+Route::get('/transaksionline/{id}/cetak', [TransaksiOnlineController::class, 'cetak'])
+    ->name('transaksionline.cetak');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
