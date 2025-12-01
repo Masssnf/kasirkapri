@@ -53,6 +53,11 @@
                             <input type="text" name="alamat_pemasangpriangan" required placeholder="Alamat"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
+                        <div class="mb-5 w-full">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sales </label>
+                            <input type="text" name="sales_iklanpriangan" required placeholder="Sales"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                        </div>
                     </div>
 
                     <div class="flex gap-5">

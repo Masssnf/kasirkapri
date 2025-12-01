@@ -42,7 +42,7 @@ class TransaksiIklanPrianganController extends Controller
     {
         // 1. Ambil data transaksi berdasarkan ID
         // Gunakan 'with' untuk mengambil data relasi jenis iklan juga
-        $transaksi =TransaksiPriangan::with('iklanpriangan')->findOrFail($id);
+        $transaksi = TransaksiPriangan::with('iklanpriangan')->findOrFail($id);
 
         // 2. Tampilkan view cetak
         // Pastikan path view sesuai dengan struktur folder Anda
@@ -60,6 +60,7 @@ class TransaksiIklanPrianganController extends Controller
             'nama_pemasangpriangan'   => 'required',
             'alamat_pemasangpriangan' => 'required',
             'id_iklanpriangan' => 'required', // Dropdown Kode Iklan
+            'sales_iklanpriangan' => 'required', // Dropdown Kode Iklan
             'tanggal_muatiklanpriangan' => 'required|date',
             'harga_transaksipriangan' => 'required',
             'jumlahbayar_transaksipriangan' => 'required',
@@ -80,6 +81,7 @@ class TransaksiIklanPrianganController extends Controller
             'nama_pemasangpriangan'     => $request->nama_pemasangpriangan,
             'alamat_pemasangpriangan'   => $request->alamat_pemasangpriangan,
             'id_iklanpriangan'          => $request->id_iklanpriangan,
+            'sales_iklanpriangan'          => $request->sales_iklanpriangan,
             'tanggal_muatiklanpriangan' => $request->tanggal_muatiklanpriangan,
 
             // Simpan Data Bersih
@@ -122,6 +124,7 @@ class TransaksiIklanPrianganController extends Controller
             'nama_pemasangpriangan'         => 'required',
             'alamat_pemasangpriangan'       => 'required',
             'id_iklanpriangan'              => 'required', // Dropdown Jenis Iklan
+            'sales_iklanpriangan'              => 'required',
             'tanggal_muatiklanpriangan'     => 'required|date',
 
             // Field uang ini string (karena ada format rupiahnya), jadi required saja
@@ -143,7 +146,7 @@ class TransaksiIklanPrianganController extends Controller
 
         // 4. CARI DATA DAN UPDATE
         // Pastikan Model sesuai dengan nama Model Anda
-        $transaksi = \App\Models\TransaksiPriangan::findOrFail($id);
+        $transaksi =TransaksiPriangan::findOrFail($id);
 
         $transaksi->update([
             // Note: No Faktur biasanya tidak diedit, jadi tidak dimasukkan.
@@ -153,6 +156,7 @@ class TransaksiIklanPrianganController extends Controller
             'nama_pemasangpriangan'         => $request->nama_pemasangpriangan,
             'alamat_pemasangpriangan'       => $request->alamat_pemasangpriangan,
             'id_iklanpriangan'              => $request->id_iklanpriangan,
+            'sales_iklanpriangan'           => $request->sales_iklanpriangan,
             'tanggal_muatiklanpriangan'     => $request->tanggal_muatiklanpriangan,
 
             // Simpan angka yang sudah dibersihkan dan dihitung ulang

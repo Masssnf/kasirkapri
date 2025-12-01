@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_pemasangpriangan');
             $table->string('alamat_pemasangpriangan');
             $table->string('id_iklanpriangan');
+            $table->string('sales_iklanpriangan');
             $table->date('tanggal_muatiklanpriangan');
             $table->integer('harga_transaksipriangan');
             $table->integer('jumlahbayar_transaksipriangan');

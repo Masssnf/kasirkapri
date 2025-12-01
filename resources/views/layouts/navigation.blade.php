@@ -40,7 +40,7 @@
                                     {{ __('Iklan Cetak') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('iklanonline.index')">
+                                <x-dropdown-link :href="route('dashboard')">
                                     {{ __('Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('iklanpriangan.index')">
@@ -72,7 +72,7 @@
                                     {{ __('Transaksi Iklan Cetak') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('iklanonline.index')">
+                                <x-dropdown-link :href="route('dashboard')">
                                     {{ __('Transaksi Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('transaksipriangan.index')">
@@ -104,7 +104,7 @@
                                     {{ __('Cetak Transaksi Priangan TV') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('iklanonline.index')">
+                                <x-dropdown-link :href="route('dashboard')">
                                     {{ __('Transaksi Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('transaksipriangan.index')">

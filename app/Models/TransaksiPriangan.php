@@ -15,6 +15,7 @@ class TransaksiPriangan extends Model
         'nama_pemasangpriangan',
         'alamat_pemasangpriangan',
         'id_iklanpriangan',
+        'sales_iklanpriangan',
         'tanggal_muatiklanpriangan',
         'harga_transaksipriangan',
         'jumlahbayar_transaksipriangan',

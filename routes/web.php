@@ -19,10 +19,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
-Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
 Route::resource('iklanpriangan', IklanPrianganController::class)->middleware('auth');
-Route::resource('transaksionline', TransaksiOnlineController::class)->middleware('auth');
+
 Route::resource('transaksipriangan', TransaksiIklanPrianganController::class)->middleware('auth');
+Route::get('/transaksipriangan/{id}/cetak', [TransaksiIklanPrianganController::class, 'cetak'])
+    ->name('transaksipriangan.cetak');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

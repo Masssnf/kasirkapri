@@ -15,7 +15,8 @@
                         <div>
                             <a href="{{ route('transaksipriangan.create') }}"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
-                                <i class="fi fi-sr-square-plus p-"></i></a>
+                                <i class="fi fi-sr-square-plus p-"
+                                title="Tambah Data"></i></a>
                         </div>
                     </div>
 
@@ -35,6 +36,7 @@
                                     <th class="px-4 py-3">TGL TRANSAKSI</th>
                                     <th class="px-4 py-3">PEMASANG</th>
                                     <th class="px-4 py-3">ALAMAT</th>
+                                    <th class="px-4 py-3">SALES</th>
                                     <th class="px-4 py-3">JENIS IKLAN</th>
                                     <th class="px-4 py-3">TGL MUAT</th>
                                     <th class="px-4 py-3">HARGA</th>
@@ -55,7 +57,7 @@
                                         <td class="px-4 py-3">{{ $t->tanggal_transaksipriangan }}</td>
                                         <td class="px-4 py-3">{{ $t->nama_pemasangpriangan }}</td>
                                         <td class="px-4 py-3">{{ Str::limit($t->alamat_pemasangpriangan, 20) }}</td>
-
+                                        <td class="px-4 py-3">{{ $t->sales_iklanpriangan }}</td>
                                         {{-- Relasi Iklan --}}
                                         <td class="px-4 py-3">{{ $t->iklanpriangan->jenis_iklanpriangan ?? '-' }}</td>
 
@@ -91,25 +93,28 @@
                                                 data-nama_pemasangpriangan="{{ $t->nama_pemasangpriangan }}"
                                                 data-alamat_pemasangpriangan="{{ $t->alamat_pemasangpriangan }}"
                                                 data-id_iklanpriangan="{{ $t->id_iklanpriangan }}"
+                                                data-sales_iklanpriangan="{{ $t->sales_iklanpriangan }}"
                                                 data-tanggal_muatiklanpriangan="{{ $t->tanggal_muatiklanpriangan }}"
                                                 data-harga="{{ $t->harga_transaksipriangan }}"
                                                 data-bayar="{{ $t->jumlahbayar_transaksipriangan }}"
                                                 data-piutang="{{ $t->piutang_transaksipriangan }}"
-                                                class="bg-amber-500 hover:bg-amber-600 px-3 py-2 rounded-lg text-white">
+                                                class="bg-amber-500 hover:bg-amber-600 px-3 py-2 rounded-lg text-white"
+                                                title="Edit Data">
                                                 <i class="fi fi-sr-file-edit"></i>
                                             </button>
 
                                             {{-- TOMBOL PRINT (BARU) --}}
-                                            <a href="{{ route('transaksipriangan.create', $t->id) }}" target="_blank"
+                                            <a href="{{ route('transaksipriangan.cetak', $t->id) }}" target="_blank"
                                                 class="bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-lg text-white"
-                                                title="Cetak Faktur">
+                                                title="Cetak Transaksi">
                                                 <i class="fi fi-sr-print"></i>
                                             </a>
 
                                             {{-- TOMBOL DELETE --}}
                                             <button
                                                 onclick="return transaksiprianganDelete('{{ $t->id }}', '{{ $t->nofakturpriangan }}')"
-                                                class="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg text-white">
+                                                class="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg text-white"
+                                                title="Hapus Data">
                                                 <i class="fi fi-sr-delete-document"></i>
                                             </button>
                                         </td>
@@ -162,6 +167,11 @@
                             <label class="block mb-1 text-sm font-medium">Alamat</label>
                             <input type="text" id="edit_alamat_pemasangpriangan" name="alamat_pemasangpriangan"
                                 required
+                                class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5" />
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Sales</label>
+                            <input type="text" id="edit_sales_iklanpriangan" name="sales_iklanpriangan" required
                                 class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                     </div>
@@ -264,6 +274,7 @@
         document.getElementById('edit_nama_pemasangpriangan').value = d.nama_pemasangpriangan;
         document.getElementById('edit_alamat_pemasangpriangan').value = d.alamat_pemasangpriangan;
         document.getElementById('edit_id_iklanpriangan').value = d.id_iklanpriangan;
+        document.getElementById('edit_sales_iklanpriangan').value = d.sales_iklanpriangan;
         document.getElementById('edit_tanggal_muatiklanpriangan').value = d.tanggal_muatiklanpriangan;
 
         // Fill Numbers
