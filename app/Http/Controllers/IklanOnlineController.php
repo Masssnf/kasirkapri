@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IklanPriangan;
+use App\Models\IklanOnline;
 use Illuminate\Http\Request;
 
-class IklanPrianganController extends Controller
+class IklanOnlineController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $iklanpriangan = IklanPriangan::paginate(5);
-        $kode_iklanpriangan = IklanPriangan::createCode();
-        
-        return view('page.iklanpriangan.index')->with([
-            'iklanpriangan' => $iklanpriangan,
-            'kode_iklanpriangan' => $kode_iklanpriangan,
+        $iklanonline = IklanOnline::paginate(5);
+        $kode_iklanonline = IklanOnline::createCode();
+
+        return view('page.iklanonline.index')->with([
+            'iklanonline' => $iklanonline,
+            'kode_iklanonline' => $kode_iklanonline,
         ]);
     }
 
@@ -35,19 +35,19 @@ class IklanPrianganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_iklanpriangan'   => 'required|unique:iklanpriangan,kode_iklanpriangan',
-            'jenis_iklanpriangan' => 'required',
+            'kode_iklanonline'   => 'required|unique:iklanonline,kode_iklanonline',
+            'jenis_iklanonline' => 'required',
         ]);
 
         // 2. Siapkan Array Data
         $data = [
             // PENTING: Panggil function createCode() dari Model di sini
-            'kode_iklanpriangan'   => $request->input('kode_iklanpriangan'),
-            'jenis_iklanpriangan'  => $request->input('jenis_iklanpriangan'),
+            'kode_iklanonline'   => $request->input('kode_iklanonline'),
+            'jenis_iklanonline'  => $request->input('jenis_iklanonline'),
         ];
 
         // 3. Simpan menggunakan MODEL (Bukan Controller)
-        IklanPriangan::create($data);
+        IklanOnline::create($data);
 
         // 4. Redirect dengan pesan sukses yang benar
         return back()->with('success', 'Data Iklan berhasil disimpan!');
@@ -75,12 +75,12 @@ class IklanPrianganController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'kode_iklanpriangan' => $request->input('kode_iklanpriangan'),
-            'jenis_iklanpriangan' => $request->input('jenis_iklanpriangan'),
+            'kode_iklanonline' => $request->input('kode_iklanonline'),
+            'jenis_iklanonline' => $request->input('jenis_iklanonline'),
         ];
-        $datas = IklanPriangan::findOrFail($id);
+        $datas = IklanOnline::findOrFail($id);
         $datas->update($data);
-        return back()->with('message_delete', 'Data Iklan Berhasil diupdate!');
+        return back()->with('success', 'Data Iklan berhasil diupdate!');
     }
 
     /**
@@ -88,8 +88,8 @@ class IklanPrianganController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = IklanPriangan::findOrFail($id);
+        $data = IklanOnline::findOrFail($id);
         $data->delete();
-        return back()->with('message_delete', 'Data Iklan Sudah dihapus');
+        return back()->with('message_delete', 'Data Iklan Online Sudah dihapus');
     }
 }

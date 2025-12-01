@@ -4,6 +4,7 @@ use App\Http\Controllers\IklanCetakController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\IklanOnlineController;
 use App\Http\Controllers\IklanPrianganController;
+use App\Http\Controllers\LaporanPrianganController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiIklanOnlineController;
 use App\Http\Controllers\TransaksiIklanPrianganController;
@@ -18,8 +19,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::resource('laporanpriangan', LaporanPrianganController::class)->middleware('auth');
 Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanpriangan', IklanPrianganController::class)->middleware('auth');
+Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
 
 Route::resource('transaksipriangan', TransaksiIklanPrianganController::class)->middleware('auth');
 Route::get('/transaksipriangan/{id}/cetak', [TransaksiIklanPrianganController::class, 'cetak'])
