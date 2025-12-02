@@ -26,21 +26,48 @@ class LaporanOnlineController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $dari = request('dari', 'all');
-        $sampai = request('sampai', 'all');
+        // 1. Ambil Input dari Form Filter
+        $dari   = $request->input('dari');
+        $sampai = $request->input('sampai');
+        $status = $request->input('status'); // Tambahan Input Status
 
-        $dari = ($dari === 'all') ? null : $dari;
-        $sampai = ($sampai === 'all') ? null : $sampai;
+        // 2. Mulai Query Builder (Agar bisa menumpuk filter)
+        $query = TransaksiOnline::query();
 
-        if ($dari === null) {
-            $data = TransaksiOnline::all();
-        } else {
-            $data = TransaksiOnline::whereBetween('tanggal_transaksionline', [$dari, $sampai])->get();
+        // 3. Logika Filter Tanggal
+        // Jika tanggal diisi dan bukan 'all'
+        if ($dari && $sampai && $dari !== 'all' && $sampai !== 'all') {
+            $query->whereBetween('tanggal_transaksionline', [$dari, $sampai]);
         }
 
-        return view('page.laporanonline.print')->with(['data' => $data]);
+        // 4. Logika Filter Status
+        // Menggunakan kolom piutang untuk menentukan status
+        if ($status && $status !== 'all') {
+            if ($status == 'Lunas') {
+                // Lunas = Piutang 0 atau negatif (kembalian)
+                $query->where('piutang_transaksionline', '<=', 0);
+            } elseif ($status == 'Belum Lunas') {
+                // Belum Lunas = Masih ada piutang (di atas 0)
+                $query->where('piutang_transaksionline', '>', 0);
+            }
+        }
+
+        // 5. Eksekusi Query (Ambil Data)
+        // Tambahkan with('iklanonline') agar relasi jenis iklan terbawa
+        $data = $query->with('iklanonline')->get();
+
+        // 6. Kirim ke View Cetak
+        return view('page.laporanonline.print')->with([
+            'data' => $data,
+            'dari' => $dari,
+            'sampai' => $sampai,
+            'status' => $status
+        ]);
     }
 
     /**

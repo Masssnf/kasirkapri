@@ -114,7 +114,9 @@
 
             <div class="header-laporan">
                 <h1>PRIANGAN TV</h1>
-                <p>LAPORAN DATA TRANSAKSI IKLAN</p>
+                <p>Jl. Dr. Sukarjo No.70, Tawangsari, Kec. Tawang,</p>
+                <p>Kota Tasikmalaya, Jawa Barat 46112</p>
+                <p>Telp: (0265) 123456 | Email: admin@priangantv.com</p>
                 <p style="font-size: 9pt;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
             </div>
 

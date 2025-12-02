@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Transaksi Online TV</title>
+    <title>Laporan Transaksi Kabar Priangan Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -14,12 +14,11 @@
             margin: 0;
             padding: 0;
             background-color: #FAFAFA;
-            font: 10pt "Tahoma";
+            font: 9pt "Tahoma";
         }
 
         * {
             box-sizing: border-box;
-            -moz-box-sizing: border-box;
         }
 
         .page {
@@ -29,23 +28,21 @@
             padding: 10mm;
             margin: 10mm auto;
             border: 1px #D3D3D3 solid;
-            border-radius: 5px;
             background: white;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9pt;
+            font-size: 8pt;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 5px;
-            vertical-align: top;
+            padding: 4px;
+            vertical-align: middle;
         }
 
         th {
@@ -62,26 +59,49 @@
             text-align: right;
         }
 
-        /* Header Laporan */
-        .header-laporan {
-            text-align: center;
+        /* --- GAYA BARU UNTUK HEADER DENGAN LOGO --- */
+        .header-container {
+            display: flex;
+            align-items: center;
+            /* Posisi vertikal sejajar tengah */
+            justify-content: center;
+            /* Posisi horizontal di tengah halaman */
             margin-bottom: 20px;
+            border-bottom: 3px double #333;
+            /* Garis pemisah di bawah kop */
+            padding-bottom: 15px;
         }
 
-        .header-laporan h1 {
-            font-size: 16pt;
+        .logo-wrapper img {
+            height: 70px;
+            /* ATUR TINGGI LOGO DI SINI */
+            width: auto;
+            /* Lebar menyesuaikan proporsi */
+            margin-right: 20px;
+            /* Jarak antara logo dan teks */
+        }
+
+        .header-text {
+            text-align: left;
+            /* Teks rata kiri terhadap logo */
+            color: #333;
+        }
+
+        .header-text h1 {
+            font-size: 18pt;
             font-weight: bold;
             margin: 0;
+            text-transform: uppercase;
         }
 
-        .header-laporan p {
+        .header-text p {
             margin: 2px 0;
+            font-size: 10pt;
+            font-weight: bold;
         }
 
-        @page {
-            size: A4 landscape;
-            margin: 0;
-        }
+        /* ---------------------------------------- */
+
 
         @media print {
 
@@ -94,13 +114,9 @@
 
             .page {
                 margin: 0;
-                border: initial;
-                border-radius: initial;
-                width: initial;
-                min-height: initial;
-                box-shadow: initial;
-                background: initial;
-                padding: 10mm;
+                border: none;
+                box-shadow: none;
+                padding: 5mm;
             }
         }
     </style>
@@ -110,83 +126,95 @@
     <div class="book">
         <div class="page">
 
-            <div class="header-laporan">
-                <h1>KABAR PRIANGAN</h1>
-                <p>LAPORAN DATA TRANSAKSI IKLAN KABAR PRIANGAN</p>
-                <p style="font-size: 9pt;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
-            </div>
+            <div class="header-container">
+                <div class="logo-wrapper">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo Kabar Priangan">
+                </div>
 
+                <div class="header-text">
+                    <h1>HARIAN UMUM KABAR PRIANGAN</h1>
+                    <p>Jl. Raya Priangan No. 123, Jawa Barat, Indonesia</p>
+                    <p>Telp: (021) 123-4567 | Email: finance@priangantv.com</p>
+                    <p style="font-size: 9pt; font-weight: normal;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
+                </div>
+            </div>
             <div>
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 30px;">NO</th>
+                            <th style="width: 20px;">NO</th>
                             <th>NO FAKTUR</th>
                             <th>TGL TRANSAKSI</th>
                             <th>PEMASANG</th>
                             <th>JENIS IKLAN</th>
                             <th>TGL MUAT</th>
+                            <th>JML MUAT</th>
                             <th>HARGA</th>
+                            <th>OMSET (Harga x Qty)</th>
                             <th>PPN</th>
                             <th>KOMISI</th>
                             <th>INSENTIF</th>
-                            <th>PEROLEHAN</th>
+                            <th>SALES</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $no = 1;
-                            // Variabel untuk hitung total bawah (opsional)
-                            $total_harga = 0;
-                            $total_ppn = 0;
-                            $total_komisi = 0;
-                            $total_insentif = 0;
+                            // Inisialisasi Variabel Penampung Total
+                            $grand_harga = 0;
+                            $grand_omset = 0;
+                            $grand_ppn = 0;
+                            $grand_komisi = 0;
+                            $grand_insentif = 0;
                         @endphp
 
-                        {{-- Menggunakan variabel $transaksi yang dikirim dari Controller --}}
                         @foreach ($data as $t)
                             @php
-                                $total_harga += $t->harga_transaksionline;
-                                $total_ppn += $t->ppn_transaksionline;
-                                $total_komisi += $t->komisi_transaksionline;
-                                $total_insentif += $t->insentif_transaksionline;
+                                // Hitung Qty & Omset
+                                $qty = $t->total_muatiklanonline > 0 ? $t->total_muatiklanonline : 1;
+                                $omset = $t->harga_transaksionline * $qty;
+
+                                // Akumulasi ke Grand Total
+                                $grand_harga += $t->harga_transaksionline;
+                                $grand_omset += $omset;
+                                $grand_ppn += $t->ppn_transaksionline;
+                                $grand_komisi += $t->komisi_transaksionline;
+                                $grand_insentif += $t->insentif_transaksionline;
                             @endphp
+
                             <tr>
                                 <td class="tengah">{{ $no++ }}</td>
-
                                 <td class="tengah">{{ $t->nofakturonline }}</td>
-
                                 <td class="tengah">
-                                    {{ \Carbon\Carbon::parse($t->tanggal_transaksionline)->format('d/m/Y') }}
-                                </td>
-
+                                    {{ \Carbon\Carbon::parse($t->tanggal_transaksionline)->format('d/m/Y') }}</td>
                                 <td>{{ $t->nama_pemasangonline }}</td>
-
                                 <td class="tengah">{{ $t->iklanonline->jenis_iklanonline ?? '-' }}</td>
-
                                 <td class="tengah">
-                                    {{ \Carbon\Carbon::parse($t->tanggal_muatiklanonline)->format('d/m/Y') }}
-                                </td>
+                                    {{ \Carbon\Carbon::parse($t->tanggal_muatiklanonline)->format('d/m/Y') }}</td>
+                                <td class="tengah">{{ $qty }}</td>
 
                                 <td class="kanan">Rp {{ number_format($t->harga_transaksionline, 0, ',', '.') }}</td>
 
+                                <td class="kanan">Rp {{ number_format($omset, 0, ',', '.') }}</td>
+
                                 <td class="kanan">Rp {{ number_format($t->ppn_transaksionline, 0, ',', '.') }}</td>
-
                                 <td class="kanan">Rp {{ number_format($t->komisi_transaksionline, 0, ',', '.') }}</td>
-
                                 <td class="kanan">Rp {{ number_format($t->insentif_transaksionline, 0, ',', '.') }}
                                 </td>
-
                                 <td class="tengah">{{ $t->sales_iklanonline }}</td>
                             </tr>
                         @endforeach
 
                         <tr style="font-weight: bold; background-color: #f9f9f9;">
-                            <td colspan="6" class="kanan">TOTAL</td>
-                            <td class="kanan">Rp {{ number_format($total_harga, 0, ',', '.') }}</td>
-                            <td class="kanan">Rp {{ number_format($total_ppn, 0, ',', '.') }}</td>
-                            <td class="kanan">Rp {{ number_format($total_komisi, 0, ',', '.') }}</td>
-                            <td class="kanan">Rp {{ number_format($total_insentif, 0, ',', '.') }}</td>
+                            <td colspan="7" class="kanan">TOTAL KESELURUHAN</td>
+
+                            <td class="kanan">Rp {{ number_format($grand_harga, 0, ',', '.') }}</td>
+
+                            <td class="kanan">Rp {{ number_format($grand_omset, 0, ',', '.') }}</td>
+
+                            <td class="kanan">Rp {{ number_format($grand_ppn, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_komisi, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_insentif, 0, ',', '.') }}</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -205,7 +233,6 @@
     </div>
 
     <script>
-        // Otomatis print saat halaman dibuka
         window.print();
     </script>
 </body>

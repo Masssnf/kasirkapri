@@ -28,19 +28,51 @@ class LaporanPrianganController extends Controller
      */
     public function store(Request $request)
     {
-        $dari = request('dari', 'all');
-        $sampai = request('sampai', 'all');
+        $dari   = $request->input('dari');
+        $sampai = $request->input('sampai');
+        $status = $request->input('status'); // Tambahan Input Status
 
-        $dari = ($dari === 'all') ? null : $dari;
-        $sampai = ($sampai === 'all') ? null : $sampai;
+        $query = TransaksiPriangan::query();
 
-        if ($dari === null) {
-            $data = TransaksiPriangan::all();
-        } else {
-            $data = TransaksiPriangan::whereBetween('tanggal_transaksipriangan', [$dari, $sampai])->get();
+        if ($dari && $sampai && $dari !== 'all' && $sampai !== 'all') {
+            $query->whereBetween('tanggal_transaksipriangan', [$dari, $sampai]);
         }
 
-        return view('page.laporanpriangan.print')->with(['data' => $data]);
+        if ($status && $status !== 'all') {
+            if ($status == 'Lunas') {
+                $query->where('piutang_transaksipriangan', '<=', 0);
+            } elseif ($status == 'Belum Lunas') {
+                $query->where('piutang_transaksipriangan', '>', 0);
+            }
+        }
+
+        $data = $query->with('iklanpriangan')->get();
+        return view('page.laporanpriangan.print')->with([
+            'data' => $data,
+            'dari' => $dari,
+            'sampai' => $sampai,
+            'status' => $status
+        ]);
+
+
+
+
+
+
+
+        // $dari = request('dari', 'all');
+        // $sampai = request('sampai', 'all');
+
+        // $dari = ($dari === 'all') ? null : $dari;
+        // $sampai = ($sampai === 'all') ? null : $sampai;
+
+        // if ($dari === null) {
+        //     $data = TransaksiPriangan::all();
+        // } else {
+        //     $data = TransaksiPriangan::whereBetween('tanggal_transaksipriangan', [$dari, $sampai])->get();
+        // }
+
+        // return view('page.laporanpriangan.print')->with(['data' => $data]);
     }
 
     /**
