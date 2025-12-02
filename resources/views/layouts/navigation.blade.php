@@ -36,11 +36,8 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('iklancetak.index')">
-                                    {{ __('Iklan Cetak') }}
-                                </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('dashboard')">
+                                <x-dropdown-link :href="route('iklanonline.index')">
                                     {{ __('Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('iklanpriangan.index')">
@@ -68,11 +65,7 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('iklancetak.index')">
-                                    {{ __('Transaksi Iklan Cetak') }}
-                                </x-dropdown-link>
-
-                                <x-dropdown-link :href="route('dashboard')">
+                                <x-dropdown-link :href="route('transaksionline.index')">
                                     {{ __('Transaksi Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('transaksipriangan.index')">
@@ -86,7 +79,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div>Cetak</div>
+                                    <div>Laporan</div>
 
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -100,15 +93,11 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('iklancetak.index')">
-                                    {{ __('Cetak Transaksi Priangan TV') }}
+                                <x-dropdown-link :href="route('laporanonline.index')">
+                                    {{ __('Laporan Transaksi Iklan Online') }}
                                 </x-dropdown-link>
-
-                                <x-dropdown-link :href="route('dashboard')">
-                                    {{ __('Transaksi Iklan Online') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('transaksipriangan.index')">
-                                    {{ __('Transaksi Iklan Priangan Tv') }}
+                                <x-dropdown-link :href="route('laporanpriangan.index')">
+                                    {{ __('Laporan Transaksi Iklan Priangan Tv') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

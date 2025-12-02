@@ -173,7 +173,7 @@
     <div class="container">
 
         <div class="header">
-            <h1>PRIANGAN TV</h1>
+            <h1>KABAR PRIANGAN</h1>
             <p>Jl. Raya Priangan No. 123, Jawa Barat, Indonesia</p>
             <p>Telp: (021) 123-4567 | Email: finance@priangantv.com</p>
         </div>
@@ -201,7 +201,7 @@
                 <table class="info-table">
                     <tr>
                         <td class="font-bold">No Faktur</td>
-                        <td>: #{{ $transaksi->nofakturonline }}</td>
+                        <td>: {{ $transaksi->nofakturonline }}</td>
                     </tr>
                     <tr>
                         <td class="font-bold">Tanggal</td>

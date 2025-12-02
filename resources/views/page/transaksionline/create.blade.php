@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('TRANSAKSI ONLINE TV') }}
+            {{ __('TRANSAKSI IKLAN ONLINE KABAR PRIANGAN') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
 
                 <div class="p-4 bg-gray-100 mb-6 rounded-xl font-bold">
-                    FORM INPUT TRANSAKSI ONLINE TV
+                    FORM INPUT TRANSAKSI IKLAN ONLINE KABAR PRIANGAN
                 </div>
 
                 @if ($errors->any())

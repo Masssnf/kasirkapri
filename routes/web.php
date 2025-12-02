@@ -4,6 +4,7 @@ use App\Http\Controllers\IklanCetakController;
 use App\Http\Controllers\IklanController;
 use App\Http\Controllers\IklanOnlineController;
 use App\Http\Controllers\IklanPrianganController;
+use App\Http\Controllers\LaporanOnlineController;
 use App\Http\Controllers\LaporanPrianganController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiIklanOnlineController;
@@ -21,6 +22,7 @@ Route::get('/dashboard', function () {
 
 
 Route::resource('laporanpriangan', LaporanPrianganController::class)->middleware('auth');
+Route::resource('laporanonline', LaporanOnlineController::class)->middleware('auth');
 Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanpriangan', IklanPrianganController::class)->middleware('auth');
 Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
