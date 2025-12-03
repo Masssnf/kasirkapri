@@ -61,7 +61,7 @@ class LaporanOnlineController extends Controller
         // Tambahkan with('iklanonline') agar relasi jenis iklan terbawa
         $data = $query->with('iklanonline')->get();
 
-        // 6. Kirim ke View Cetak
+        // 6. Kirim ke View Cetak       uuuu
         return view('page.laporanonline.print')->with([
             'data' => $data,
             'dari' => $dari,
