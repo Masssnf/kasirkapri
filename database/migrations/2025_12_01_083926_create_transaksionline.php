@@ -22,7 +22,7 @@ return new class extends Migration
             // Jangan string, kecuali ID di tabel masternya memang string (UUID)
             $table->unsignedBigInteger('id_iklanonline');
 
-            $table->string('portal_iklanonline');
+            $table->string('portal_iklanonline')->nullable();
             $table->string('sales_iklanonline');
             $table->integer('total_muatiklanonline'); // Qty
             $table->date('tanggal_muatiklanonline');

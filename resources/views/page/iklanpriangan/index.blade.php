@@ -19,8 +19,8 @@
                                 <label for="kode_iklanpriangan"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Iklan
                                 </label>
-                                <input type="text" name="kode_iklanpriangan" value="{{ $kode_iklanpriangan ?? 'error' }}"
-                                    readonly
+                                <input type="text" name="kode_iklanpriangan"
+                                    value="{{ $kode_iklanpriangan ?? 'error' }}" readonly
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" " />
                             </div>
                             <div class="mb-3">
@@ -68,42 +68,41 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($iklanpriangan as $key => $i)
-                                        <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
-                                            align="center">
-                                            <th scope="row"
-                                                class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $no++ }}
-                                            </th>
-                                            <td class="px-5 py-3">
-                                                {{ $i->kode_iklanpriangan }}
-                                            </td>
-                                            <td class="px-5 py-3">
-                                                {{ $i->jenis_iklanpriangan }}
-                                            </td>
-                                            <td class="px-5 py-3">
-                                                <button type="button"
-                                                    class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
-                                                    onclick="editSourceModal(this)" data-modal-target="sourceModal"
-                                                    data-id="{{ $i->id }}"
-                                                    data-kode_iklanpriangan="{{ $i->kode_iklanpriangan }}"
-                                                    data-jenis_iklanpriangan="{{ $i->jenis_iklanpriangan }}">
-                                                    <i class="fi fi-sr-file-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return iklanprianganDelete('{{ $i->id }}','{{ $i->kode_iklanpriangan }}')">
-                                                    <i class="fi fi-sr-delete-document"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                     @foreach ($iklanpriangan as $key=> $i)
+                                <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
+                                    align="center">
+                                    <th scope="row"
+                                        class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $no++ }}
+                                    </th>
+                                    <td class="px-5 py-3">
+                                        {{ $i->kode_iklanpriangan }}
+                                    </td>
+                                    <td class="px-5 py-3">
+                                        {{ $i->jenis_iklanpriangan }}
+                                    </td>
+                                    <td class="px-5 py-3">
+                                        <button type="button"
+                                            class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500"
+                                            onclick="editSourceModal(this)" data-modal-target="sourceModal"
+                                            data-id="{{ $i->id }}"
+                                            data-kode_iklanpriangan="{{ $i->kode_iklanpriangan }}"
+                                            data-jenis_iklanpriangan="{{ $i->jenis_iklanpriangan }}">
+                                            <i class="fi fi-sr-file-edit"></i>
+                                        </button>
+                                        <button class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
+                                            onclick="return iklanprianganDelete('{{ $i->id }}','{{ $i->kode_iklanpriangan }}')">
+                                            <i class="fi fi-sr-delete-document"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
                                 </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4">
-                            {{ $iklanpriangan->links() }}
-                        </div>
+                                </table>
+                            </div>
+                            <div class="mt-4">
+                                {{ $iklanpriangan->links() }}
+                            </div>
                     </div>
                 </div>
             </div>
@@ -225,22 +224,47 @@
         status.classList.toggle('hidden');
     }
 
+    // --- 4. Delete Logic dengan SweetAlert ---
     const iklanprianganDelete = async (id, kode_iklanpriangan) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklanpriangan} ?`);
-        if (tanya) {
-            await axios.post(`/iklanpriangan/${id}`, {
-                    '_method': 'DELETE',
-                    '_token': $('meta[name="csrf-token"]').attr('content')
-                })
-                .then(function(response) {
-                    // Handle success
-                    location.reload();
-                })
-                .catch(function(error) {
-                    // Handle error
-                    alert('Error deleting record');
-                    console.log(error);
-                });
-        }
-    }
+        // Tampilkan SweetAlert Konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: `Data faktur ${kode_iklanpriangan} akan dihapus permanen!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Warna merah untuk tombol hapus
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then(async (result) => {
+            // Jika user klik tombol "Ya, Hapus!"
+            if (result.isConfirmed) {
+                try {
+                    // Panggil Axios Delete
+                    const response = await axios.post(`/iklanpriangan/${id}`, {
+                        '_method': 'DELETE',
+                        '_token': document.querySelector('meta[name="csrf-token"]').content
+                    });
+
+                    // Jika sukses, munculkan pesan Sukses lalu reload
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+
+                } catch (error) {
+                    // Jika gagal
+                    Swal.fire(
+                        'Gagal!',
+                        'Terjadi kesalahan saat menghapus data.',
+                        'error'
+                    );
+                    console.error(error);
+                }
+            }
+        });
+    };
 </script>

@@ -50,7 +50,8 @@ class IklanOnlineController extends Controller
         IklanOnline::create($data);
 
         // 4. Redirect dengan pesan sukses yang benar
-        return back()->with('success', 'Data Iklan berhasil disimpan!');
+        return redirect()->route('iklanonline.index')
+            ->with('success', 'Data Iklan Online Berhasil Ditambahkan!');
     }
 
     /**
@@ -80,16 +81,19 @@ class IklanOnlineController extends Controller
         ];
         $datas = IklanOnline::findOrFail($id);
         $datas->update($data);
-        return back()->with('success', 'Data Iklan berhasil diupdate!');
+        return redirect()->route('iklanonline.index')
+            ->with('success', 'Data Iklan Online Berhasil Di Update!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $data = IklanOnline::findOrFail($id);
         $data->delete();
-        return back()->with('message_delete', 'Data Iklan Online Sudah dihapus');
+
+        // Kembalikan JSON (bukan redirect)
+        return response()->json(['status' => 'success']);
     }
 }

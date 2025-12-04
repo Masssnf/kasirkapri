@@ -38,7 +38,7 @@ class TransaksiOnlineController extends Controller
     public function cetak($id)
     {
         // Ambil data transaksi berdasarkan ID beserta relasi iklannya
-        $transaksi =TransaksiOnline::with('iklanonline')->findOrFail($id);
+        $transaksi = TransaksiOnline::with('iklanonline')->findOrFail($id);
 
         // Arahkan ke view cetak
         return view('page.transaksionline.cetak', compact('transaksi'));
@@ -128,7 +128,7 @@ class TransaksiOnlineController extends Controller
         ]);
 
         return redirect()->route('transaksionline.index')
-            ->with('success', 'Data Transaksi Berhasil Disimpan!');
+            ->with('success', 'Data Iklan Online Berhasil Ditambahkan!');
     }
 
     /**
@@ -158,7 +158,7 @@ class TransaksiOnlineController extends Controller
             'nama_pemasangonline'     => 'required',
             'alamat_pemasangonline'   => 'required',
             'id_iklanonline'          => 'required',
-            'portal_iklanonline'      => 'required',
+            'portal_iklanonline'      => 'nullable',
             'sales_iklanonline'       => 'required',
             'tanggal_muatiklanonline' => 'required|date',
             'total_muatiklanonline'   => 'required|numeric|min:1', // Wajib Qty
@@ -223,7 +223,7 @@ class TransaksiOnlineController extends Controller
         ]);
 
         return redirect()->route('transaksionline.index')
-            ->with('success', 'Data Berhasil Diupdate!');
+            ->with('success', 'Data Iklan Online Berhasil Di Update!');
     }
 
     /**

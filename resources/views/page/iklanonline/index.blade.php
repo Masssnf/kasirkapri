@@ -69,7 +69,7 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                            @foreach ($iklanonline as $key=> $i)
+                                             @foreach ($iklanonline as $key=> $i)
                                 <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                     align="center">
                                     <th scope="row"
@@ -223,22 +223,47 @@
         status.classList.toggle('hidden');
     }
 
+    // --- 4. Delete Logic dengan SweetAlert ---
     const iklanonlineDelete = async (id, kode_iklanonline) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus ${kode_iklanonline} ?`);
-        if (tanya) {
-            await axios.post(`/iklanonline/${id}`, {
-                    '_method': 'DELETE',
-                    '_token': $('meta[name="csrf-token"]').attr('content')
-                })
-                .then(function(response) {
-                    // Handle success
-                    location.reload();
-                })
-                .catch(function(error) {
-                    // Handle error
-                    alert('Error deleting record');
-                    console.log(error);
-                });
-        }
-    }
+        // Tampilkan SweetAlert Konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: `Data faktur ${kode_iklanonline} akan dihapus permanen!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Warna merah untuk tombol hapus
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then(async (result) => {
+            // Jika user klik tombol "Ya, Hapus!"
+            if (result.isConfirmed) {
+                try {
+                    // Panggil Axios Delete
+                    const response = await axios.post(`/iklanonline/${id}`, {
+                        '_method': 'DELETE',
+                        '_token': document.querySelector('meta[name="csrf-token"]').content
+                    });
+
+                    // Jika sukses, munculkan pesan Sukses lalu reload
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+
+                } catch (error) {
+                    // Jika gagal
+                    Swal.fire(
+                        'Gagal!',
+                        'Terjadi kesalahan saat menghapus data.',
+                        'error'
+                    );
+                    console.error(error);
+                }
+            }
+        });
+    };
 </script>

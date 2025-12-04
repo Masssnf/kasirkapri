@@ -401,26 +401,46 @@
         document.getElementById('edit_piutang').value = formatRupiah(Math.round(sisaPiutang));
     }
     // --- 4. Delete Logic ---
-    const transaksionlineDelete = async (id, nofaktur) => {
-        // Konfirmasi sebelum menghapus
-        if (confirm(
-                `Apakah Anda yakin ingin menghapus No Faktur ${nofaktur}? Data yang dihapus tidak dapat dikembalikan.`
-                )) {
-            try {
-                // Panggil Route Delete menggunakan Axios
-                await axios.post(`/transaksionline/${id}`, {
-                    '_method': 'DELETE', // Method Spoofing agar dikenali sebagai DELETE oleh Laravel
-                    '_token': document.querySelector('meta[name="csrf-token"]').content
-                });
+    const transaksionlineDelete = async (id, nofakturonline) => {
+        // Tampilkan SweetAlert Konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: `Data faktur ${nofakturonline} akan dihapus permanen!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Warna merah untuk tombol hapus
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then(async (result) => {
+            // Jika user klik tombol "Ya, Hapus!"
+            if (result.isConfirmed) {
+                try {
+                    // Panggil Axios Delete
+                    const response = await axios.post(`/transaksionline/${id}`, {
+                        '_method': 'DELETE',
+                        '_token': document.querySelector('meta[name="csrf-token"]').content
+                    });
 
-                // Jika berhasil, reload halaman
-                alert('Data berhasil dihapus.');
-                location.reload();
+                    // Jika sukses, munculkan pesan Sukses lalu reload
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
 
-            } catch (error) {
-                console.error(error);
-                alert('Gagal menghapus data. Silakan coba lagi.');
+                } catch (error) {
+                    // Jika gagal
+                    Swal.fire(
+                        'Gagal!',
+                        'Terjadi kesalahan saat menghapus data.',
+                        'error'
+                    );
+                    console.error(error);
+                }
             }
-        }
-    }
+        });
+    };
 </script>

@@ -14,7 +14,7 @@ class IklanPrianganController extends Controller
     {
         $iklanpriangan = IklanPriangan::paginate(5);
         $kode_iklanpriangan = IklanPriangan::createCode();
-        
+
         return view('page.iklanpriangan.index')->with([
             'iklanpriangan' => $iklanpriangan,
             'kode_iklanpriangan' => $kode_iklanpriangan,
@@ -50,7 +50,8 @@ class IklanPrianganController extends Controller
         IklanPriangan::create($data);
 
         // 4. Redirect dengan pesan sukses yang benar
-        return back()->with('success', 'Data Iklan berhasil disimpan!');
+        return redirect()->route('iklanpriangan.index')
+            ->with('success', 'Data Iklan Online Berhasil Ditambahkan!');
     }
 
     /**
@@ -80,7 +81,8 @@ class IklanPrianganController extends Controller
         ];
         $datas = IklanPriangan::findOrFail($id);
         $datas->update($data);
-        return back()->with('message_delete', 'Data Iklan Berhasil diupdate!');
+        return redirect()->route('iklanpriangan.index')
+            ->with('success', 'Data Iklan Online Berhasil Di Update!');
     }
 
     /**

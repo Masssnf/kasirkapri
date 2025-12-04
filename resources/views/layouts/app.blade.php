@@ -11,6 +11,15 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    <style>
+        /* Target class asli milik SweetAlert2 */
+        .swal2-timer-progress-bar {
+            background-color: #3b82f6 !important;
+            /* Warna Biru (Bisa diganti kode hex lain) */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -100,7 +109,30 @@
         });
     </script>
     @stack('scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                timer: 2000,
+                timerProgressBar: true,
+                colorProgressBar: '#28a745',
+                showConfirmButton: false,
+            });
+        @endif
 
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        @endif
+    </script>
 </body>
 
 </html>
