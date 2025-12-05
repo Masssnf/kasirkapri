@@ -72,19 +72,13 @@
 
                 <div class="mb-6">
                     <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Kabar Priangan</h2>
-                    <span class="text-xs font-semibold tracking-wide text-blue-600 dark:text-blue-400 uppercase">Ad
-                        Cashier System</span>
+                    <span class="text-xs font-semibold tracking-wide text-blue-600 dark:text-blue-400 uppercase">Aplikasi Kasir Iklan</span>
                 </div>
 
                 <h1 class="mb-4 text-3xl font-medium text-gray-900 dark:text-white">
-                    Welcome to the <br>
+                    Selamat Datang <br>
                     <span class="text-blue-600 dark:text-blue-400">Aplikasi Transaksi Iklan</span>
                 </h1>
-
-                <p class="mb-6 text-[#706f6c] dark:text-[#A1A09A] text-base">
-                    Streamline your advertising transactions with ease. Manage bookings, track payments, and generate
-                    reports all in one place for <strong>Kabar Priangan</strong>.
-                </p>
 
                 <div class="flex flex-col gap-3">
                     @auth
@@ -129,6 +123,8 @@
                     <path d="M5 17H5.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                     <path d="M13 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M16 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
 
