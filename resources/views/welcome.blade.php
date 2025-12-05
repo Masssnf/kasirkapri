@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Kabar Priangan Ad Cashier</title>
+    <title>SIKAPRI</title>
     <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -78,7 +78,7 @@
 
                 <h1 class="mb-4 text-3xl font-medium text-gray-900 dark:text-white">
                     Welcome to the <br>
-                    <span class="text-blue-600 dark:text-blue-400">Ad Management Portal</span>
+                    <span class="text-blue-600 dark:text-blue-400">Aplikasi Transaksi Iklan</span>
                 </h1>
 
                 <p class="mb-6 text-[#706f6c] dark:text-[#A1A09A] text-base">
