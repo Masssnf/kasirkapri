@@ -23,7 +23,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('laporanpriangan', LaporanPrianganController::class)->middleware('auth');
 Route::resource('laporanonline', LaporanOnlineController::class)->middleware('auth');
-Route::resource('iklancetak', IklanCetakController::class)->middleware('auth');
 Route::resource('iklanpriangan', IklanPrianganController::class)->middleware('auth');
 Route::resource('iklanonline', IklanOnlineController::class)->middleware('auth');
 
