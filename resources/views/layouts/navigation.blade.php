@@ -66,10 +66,10 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('transaksionline.index')">
-                                    {{ __('Transaksi Iklan Online') }}
+                                    {{ __('Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('transaksipriangan.index')">
-                                    {{ __('Transaksi Iklan Priangan Tv') }}
+                                    {{ __('Iklan Priangan Tv') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
@@ -94,10 +94,10 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('laporanonline.index')">
-                                    {{ __('Laporan Transaksi Iklan Online') }}
+                                    {{ __('Laporan Iklan Online') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('laporanpriangan.index')">
-                                    {{ __('Laporan Transaksi Iklan Priangan Tv') }}
+                                    {{ __('Laporan Iklan Priangan Tv') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
