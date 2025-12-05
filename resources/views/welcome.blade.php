@@ -100,7 +100,7 @@
             </div>
 
             <div class="relative lg:w-[500px] shrink-0 overflow-hidden hidden lg:block">
-                <img src="{{ asset('images/landing-hero.jpg') }}" alt="Dashboard Preview"
+                <img src="{{ asset('images/text.jpg') }}" alt="Dashboard Preview"
                     class="w-full h-full object-cover object-center opacity-95 hover:scale-105 transition-transform duration-700 ease-in-out"
                     onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'" />
 
