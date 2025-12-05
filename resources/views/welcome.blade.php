@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SIKAPRI</title>
+    <title>Kabar Priangan Ad Cashier</title>
     <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,20 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <style>
-            /*! tailwindcss v4.0.7 | MIT License | https://tailwindcss.com */
-            @layer theme {
-
-                :root,
-                :host {
-                    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                    --color-primary-500: #0ea5e9;
-                    /* Example primary color (sky blue) */
-                    --color-primary-600: #0284c7;
-                }
-            }
-
-            /* ... (Rest of the Tailwind CSS styles - kept for structure) ... */
-            /* You can keep the existing CSS block or replace it with a CDN link for simplicity in a raw HTML file */
+            /* Fallback CSS jika Vite belum build */
         </style>
         <script src="https://cdn.tailwindcss.com"></script>
     @endif
@@ -65,36 +52,41 @@
     <div
         class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <main
-            class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row shadow-xl rounded-lg overflow-hidden">
+            class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row shadow-2xl rounded-2xl overflow-hidden bg-white dark:bg-[#161615]">
 
-            <div
-                class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] flex flex-col justify-center">
+            <div class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-16 flex flex-col justify-center">
 
-                <div class="mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Kabar Priangan</h2>
-                    <span class="text-xs font-semibold tracking-wide text-blue-600 dark:text-blue-400 uppercase">Aplikasi Kasir Iklan</span>
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight">Kabar Priangan</h2>
+                    <span class="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase">Aplikasi
+                        Kasir Iklan</span>
                 </div>
 
-                <h1 class="mb-4 text-3xl font-medium text-gray-900 dark:text-white">
+                <h1 class="mb-4 text-4xl font-semibold text-gray-900 dark:text-white leading-tight">
                     Selamat Datang <br>
-                    <span class="text-blue-600 dark:text-blue-400">Aplikasi Transaksi Iklan</span>
+                    <span class="text-blue-600 dark:text-blue-500">Portal Transaksi</span>
                 </h1>
+
+                <p class="mb-8 text-gray-500 dark:text-gray-400 text-base leading-relaxed">
+                    Kelola transaksi iklan, cetak faktur, dan pantau laporan keuangan Kabar Priangan dalam satu sistem
+                    yang terintegrasi.
+                </p>
 
                 <div class="flex flex-col gap-3">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="w-fit px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105">
-                            Go to Dashboard &rarr;
+                            class="w-fit px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all transform hover:-translate-y-0.5">
+                            Buka Dashboard &rarr;
                         </a>
                     @else
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 items-center">
                             <a href="{{ route('login') }}"
-                                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md shadow transition">
-                                Login to Start
+                                class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all">
+                                Login
                             </a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                    class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md border border-gray-300 transition dark:bg-[#2a2a2a] dark:text-white dark:border-gray-600 dark:hover:bg-[#333]">
+                                    class="px-6 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white font-medium transition">
                                     Register
                                 </a>
                             @endif
@@ -102,35 +94,19 @@
                     @endauth
                 </div>
 
-                <p class="mt-8 text-xs text-gray-400">
+                <p class="mt-12 text-xs text-gray-400 border-t pt-4 dark:border-gray-800">
                     &copy; {{ date('Y') }} Kabar Priangan. All rights reserved.
                 </p>
             </div>
 
-            <div
-                class="bg-blue-50 dark:bg-[#111827] relative lg:-ml-px -mb-px lg:mb-0 lg:w-[480px] shrink-0 overflow-hidden flex items-center justify-center">
-                <svg class="w-3/4 h-auto text-blue-500 dark:text-blue-400 opacity-80" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M3 3H21C22.1046 3 23 3.89543 23 5V19C23 20.1046 22.1046 21 21 21H3C1.89543 21 1 20.1046 1 19V5C1 3.89543 1.89543 3 3 3Z"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M9 3V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M1 9H23" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M5 14H5.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M5 17H5.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M13 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M16 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
+            <div class="relative lg:w-[500px] shrink-0 overflow-hidden hidden lg:block">
+                <img src="{{ asset('images/landing-hero.jpg') }}" alt="Dashboard Preview"
+                    class="w-full h-full object-cover object-center opacity-95 hover:scale-105 transition-transform duration-700 ease-in-out"
+                    onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'" />
 
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-blue-100/50 to-transparent dark:from-[#000]/50 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent dark:from-[#161615]/40">
                 </div>
+                <div class="absolute inset-0 bg-blue-600/10 mix-blend-multiply"></div>
             </div>
         </main>
     </div>
