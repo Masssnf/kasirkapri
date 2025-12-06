@@ -28,6 +28,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Iklan</label>
                                 <select class="js-example-placeholder-single js-states form-control w-full m-6"
                                     name="jenis_iklanonline" data-placeholder="Pilih Jenis Iklan">
+                                    <option value="">Pilih...</option>
                                     <option value="Artikel">Artikel</option>
                                     <option value="Podcast">Podcast</option>
                                     <option value="Iklan Video">Iklan Video</option>
