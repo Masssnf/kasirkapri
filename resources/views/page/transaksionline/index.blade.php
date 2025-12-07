@@ -88,7 +88,7 @@
                                                 data-nama="{{ $t->nama_pemasangonline }}"
                                                 data-alamat="{{ $t->alamat_pemasangonline }}"
                                                 data-id_iklan="{{ $t->id_iklanonline }}"
-                                                data-portal="{{ $t->portal_iklanonline }}"
+                                                data-portal="{{ $t->portal_iklanonline }}"   
                                                 data-sales="{{ $t->sales_iklanonline }}"
                                                 data-tgl_muat="{{ $t->tanggal_muatiklanonline }}" {{-- WAJIB ADA INI: Agar Total Muat muncul di form edit --}}
                                                 data-total_muat="{{ $t->total_muatiklanonline }}"
@@ -178,9 +178,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block mb-1 text-sm font-medium">Portal Iklan</label>
-                            <select id="edit_portal" name="portal_iklanonline" required
+                            <select id="edit_portal" name="portal_iklanonline"
                                 class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
-                                <option value="">Pilih Portal...</option>
+                                <option value="">-</option>
                                 <option value="Kabar Tasikmalaya">Kabar Tasikmalaya</option>
                                 <option value="Kabar Singaparna">Kabar Singaparna</option>
                                 <option value="Kabar Ciamis">Kabar Ciamis</option>

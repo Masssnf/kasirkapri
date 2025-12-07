@@ -4,102 +4,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak Faktur - {{ $transaksi->nofakturpriangan }}</title>
+    <title>Faktur - {{ $transaksi->nofakturpriangan }}</title>
     <style>
         body {
-            font-family: 'Courier New', Courier, monospace;
-            /* Font struk */
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 14px;
-            color: #000;
+            color: #333;
+            padding: 40px;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 20px;
+            border: 1px solid #eee;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         }
 
+        /* Header / Kop Surat */
         .header {
             text-align: center;
-            border-bottom: 2px dashed #333;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 28px;
+            color: #2d3748;
+            text-transform: uppercase;
         }
 
         .header p {
-            margin: 2px 0;
+            margin: 5px 0;
+            color: #718096;
         }
 
-        .info-table {
-            width: 100%;
-            margin-bottom: 20px;
+        /* Info Faktur */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            margin-top: 0;
+            font-size: 16px;
+            text-decoration: underline;
         }
 
         .info-table td {
-            padding: 3px 0;
-            vertical-align: top;
-        }
-
-        .label {
-            font-weight: bold;
-            width: 130px;
-        }
-
-        .invoice-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .invoice-table th,
-        .invoice-table td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .invoice-table th {
-            background-color: #f0f0f0;
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
+            padding: 2px 10px 2px 0;
         }
 
         .font-bold {
             font-weight: bold;
         }
 
+        /* Tabel Rincian */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .invoice-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Footer / Tanda Tangan */
         .footer {
-            margin-top: 40px;
+            margin-top: 60px;
             display: flex;
             justify-content: space-between;
             text-align: center;
         }
 
         .signature-box {
-            width: 200px;
-            margin-top: 50px;
-            border-top: 1px solid #000;
+            height: 80px;
         }
 
-        /* Tombol print hanya muncul di layar, hilang saat diprint */
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        /* Status Stamp */
+        .status-stamp {
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid;
+            font-weight: bold;
+            font-size: 16px;
+            transform: rotate(-5deg);
+            margin-top: 10px;
+        }
+
+        .lunas {
+            border-color: green;
+            color: green;
+        }
+
+        .belum {
+            border-color: red;
+            color: red;
+        }
+
         @media print {
             .no-print {
-                display: none;
+                display: none !important;
             }
 
             .container {
                 border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            body {
+                padding: 0;
             }
         }
     </style>
@@ -109,99 +152,161 @@
 
     <div class="no-print" style="text-align: center; margin-bottom: 20px;">
         <button onclick="window.print()"
-            style="padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px;">
-            Cetak Dokumen
+            style="background-color: #3182ce; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
+            Cetak Faktur
         </button>
     </div>
 
     <div class="container">
+
         <div class="header">
             <h1>PRIANGAN TV</h1>
-            <p>Jl. Dr. Sukarjo No.70, Tawangsari, Kec. Tawang,</p>
-            <p>Kota Tasikmalaya, Jawa Barat 46112</p>
-            <p>Telp: (0265) 123456 | Email: admin@priangantv.com</p>
+            <p>
+                Jl. Dr. Soekarjo Nomor 70 Kelurahan Tawangsari Kecamatan Tawang </p>
+            <p>Kota Tasikmalaya Jawa Barat (HU. Kabar
+                Priangan) Jawa Barat 46112 </p>
+            <p>Telp: 082260030311 | Email:
+                priangantv2024@gmail.com</p>
         </div>
 
-        <table class="info-table">
-            <tr>
-                <td class="label">No Faktur</td>
-                <td>: {{ $transaksi->nofakturpriangan }}</td>
-                <td class="label">Tgl Transaksi</td>
-                <td>: {{ \Carbon\Carbon::parse($transaksi->tanggal_transaksipriangan)->format('d-m-Y') }}</td>
-            </tr>
-            <tr>
-                <td class="label">Pemasang</td>
-                <td>: {{ $transaksi->nama_pemasangpriangan }}</td>
-                <td class="label">Sales</td>
-                <td>: {{ $transaksi->sales_iklanpriangan ?? '-' }}</td>
-            </tr>
-            <tr>
-                <td class="label">Alamat</td>
-                <td colspan="3">: {{ $transaksi->alamat_pemasangpriangan }}</td>
-            </tr>
-        </table>
+        <div class="info-section">
+            <div class="info-box">
+                <h3>TAGIHAN KEPADA:</h3>
+                <table class="info-table">
+                    <tr>
+                        <td class="font-bold">Nama</td>
+                        <td>: {{ $transaksi->nama_pemasangpriangan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Alamat</td>
+                        <td>: {{ $transaksi->alamat_pemasangpriangan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Sales</td>
+                        {{-- Menggunakan sales_iklanpriangan (pastikan kolom ini ada di DB Priangan) --}}
+                        <td>: {{ $transaksi->sales_iklanpriangan ?? '-' }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="info-box">
+                <h3>DETAIL FAKTUR:</h3>
+                <table class="info-table">
+                    <tr>
+                        <td class="font-bold">No Faktur</td>
+                        <td>: {{ $transaksi->nofakturpriangan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Tanggal</td>
+                        <td>: {{ \Carbon\Carbon::parse($transaksi->tanggal_transaksipriangan)->format('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Status</td>
+                        <td>:
+                            @if ($transaksi->piutang_transaksipriangan <= 0)
+                                <span style="color: green; font-weight: bold;">LUNAS</span>
+                            @else
+                                <span style="color: red; font-weight: bold;">BELUM LUNAS</span>
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
         <table class="invoice-table">
             <thead>
                 <tr>
-                    <th style="width: 5%;">No</th>
-                    <th>Keterangan</th>
-                    <th style="width: 25%;">Harga (Rp)</th>
+                    <th style="width: 5%">No</th>
+                    <th style="width: 45%">Deskripsi</th>
+                    <th class="text-center" style="width: 15%">Harga</th>
+                    <th class="text-center" style="width: 10%">Qty</th>
+                    <th class="text-right" style="width: 25%">Total (Rp)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="text-align: center;">1</td>
+                    <td class="text-center">1</td>
                     <td>
                         <strong>{{ $transaksi->iklanpriangan->jenis_iklanpriangan ?? 'Iklan Umum' }}</strong><br>
+
                         <small>Tanggal Muat:
-                            {{ \Carbon\Carbon::parse($transaksi->tanggal_muatiklanpriangan)->format('d-m-Y') }}</small>
+                            {{ \Carbon\Carbon::parse($transaksi->tanggal_muatiklanpriangan)->format('d/m/Y') }}</small>
                     </td>
-                    <td class="text-right">{{ number_format($transaksi->harga_transaksipriangan, 0, ',', '.') }}</td>
+
+                    <td class="text-center">{{ number_format($transaksi->harga_transaksipriangan, 0, ',', '.') }}</td>
+
+                    @php
+                        $qty = $transaksi->total_muatiklanpriangan ?? 1;
+                        $subtotal_item = $transaksi->harga_transaksipriangan * $qty;
+                    @endphp
+                    <td class="text-center">{{ $qty }}</td>
+
+                    <td class="text-right">{{ number_format($subtotal_item, 0, ',', '.') }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="width: 40%; margin-left: auto;">
+            <table class="invoice-table" style="margin-top: 0;">
+                <tr>
+                    <td>Subtotal</td>
+                    <td class="text-right">{{ number_format($subtotal_item, 0, ',', '.') }}</td>
                 </tr>
 
-                <tr style="background-color: #fafafa;">
-                    <td colspan="2" class="text-right font-bold">TOTAL TAGIHAN</td>
-                    <td class="text-right font-bold">
-                        {{ number_format($transaksi->harga_transaksipriangan, 0, ',', '.') }}</td>
+                @if ($transaksi->diskon_transaksipriangan > 0)
+                    <tr>
+                        <td>Diskon</td>
+                        <td class="text-right" style="color: red;">-
+                            {{ number_format($transaksi->diskon_transaksipriangan, 0, ',', '.') }}</td>
+                    </tr>
+                @endif
+
+                <tr>
+                    <td>PPN (11%)</td>
+                    <td class="text-right">{{ number_format($transaksi->ppn_transaksipriangan ?? 0, 0, ',', '.') }}
+                    </td>
+                </tr>
+
+                <tr style="border-top: 2px solid #333; font-size: 16px; background-color: #f8f9fa;">
+                    <td><strong>TOTAL TAGIHAN</strong></td>
+                    <td class="text-right"><strong>Rp
+                            {{ number_format($transaksi->totaltagihan_transaksipriangan ?? $subtotal_item + ($transaksi->ppn_transaksipriangan ?? 0), 0, ',', '.') }}</strong>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="text-right">Dibayar / DP</td>
+                    <td>Dibayar (DP)</td>
                     <td class="text-right">{{ number_format($transaksi->jumlahbayar_transaksipriangan, 0, ',', '.') }}
                     </td>
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="text-right font-bold">SISA PIUTANG</td>
-                    <td class="text-right font-bold"
+                    <td><strong>SISA PIUTANG</strong></td>
+                    <td class="text-right"
                         style="color: {{ $transaksi->piutang_transaksipriangan > 0 ? 'red' : 'green' }};">
-                        {{ number_format($transaksi->piutang_transaksipriangan, 0, ',', '.') }}
+                        <strong>Rp {{ number_format($transaksi->piutang_transaksipriangan, 0, ',', '.') }}</strong>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-
-        <div style="margin-top: 15px;">
-            Status Pembayaran:
-            @if ($transaksi->piutang_transaksipriangan <= 0)
-                <span style="border: 2px solid green; color: green; padding: 2px 10px; font-weight: bold;">LUNAS</span>
-            @else
-                <span style="border: 2px solid red; color: red; padding: 2px 10px; font-weight: bold;">BELUM
-                    LUNAS</span>
-            @endif
+            </table>
         </div>
 
         <div class="footer">
             <div>
                 <p>Penerima,</p>
-                <div class="signature-box">{{ $transaksi->nama_pemasangpriangan }}</div>
+                <div class="signature-box"></div>
+                <div class="signature-line">{{ $transaksi->nama_pemasangpriangan }}</div>
             </div>
             <div>
                 <p>Hormat Kami,</p>
-                <div class="signature-box">Admin Keuangan</div>
+                <div class="signature-box">
+                    @if ($transaksi->piutang_transaksipriangan <= 0)
+                        <div class="status-stamp lunas">LUNAS</div>
+                    @endif
+                </div>
+                <div class="signature-line">Admin Keuangan</div>
             </div>
         </div>
+
     </div>
 
 </body>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('TRANSAKSI ONLINE TV') }}
+            {{ __('TRANSAKSI KABAR PRIANGAN ONLINE') }}
         </h2>
     </x-slot>
 
@@ -66,7 +66,7 @@
                             <div>
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Alamat
                                     Pemasang</label>
-                                <textarea name="alamat_pemasangonline" rows="4" required placeholder="Alamat lengkap..."
+                                <textarea name="alamat_pemasangonline" rows="5" required placeholder="Alamat lengkap..."
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
                             </div>
                         </div>

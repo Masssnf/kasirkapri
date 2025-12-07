@@ -61,7 +61,7 @@ class TransaksiOnlineController extends Controller
             'alamat_pemasangonline'   => 'required',
 
             'id_iklanonline'          => 'required',
-            'portal_iklanonline'        => 'required',
+            'portal_iklanonline'        => 'nullable',
             'tanggal_muatiklanonline'   => 'required|date',
             'sales_iklanonline'         => 'required',
             'total_muatiklanonline'     => 'required|numeric|min:1', // Validasi Qty
@@ -111,7 +111,7 @@ class TransaksiOnlineController extends Controller
             'alamat_pemasangonline'   => $request->alamat_pemasangonline,
 
             'id_iklanonline'          => $request->id_iklanonline,
-            'portal_iklanonline'        => $request->portal_iklanonline,
+            'portal_iklanonline'        => $request->portal_iklanonline ? : '-',
             'tanggal_muatiklanonline'   => $request->tanggal_muatiklanonline,
             'sales_iklanonline'         => $request->sales_iklanonline,
 
@@ -206,7 +206,7 @@ class TransaksiOnlineController extends Controller
             'nama_pemasangonline'     => $request->nama_pemasangonline,
             'alamat_pemasangonline'   => $request->alamat_pemasangonline,
             'id_iklanonline'          => $request->id_iklanonline,
-            'portal_iklanonline'      => $request->portal_iklanonline,
+            'portal_iklanonline'      => $request->portal_iklanonline ? : '-',
             'sales_iklanonline'       => $request->sales_iklanonline,
             'tanggal_muatiklanonline' => $request->tanggal_muatiklanonline,
 

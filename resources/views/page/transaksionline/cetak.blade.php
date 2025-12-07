@@ -173,9 +173,9 @@
     <div class="container">
 
         <div class="header">
-            <h1>KABAR PRIANGAN</h1>
-            <p>Jl. Raya Priangan No. 123, Jawa Barat, Indonesia</p>
-            <p>Telp: (021) 123-4567 | Email: finance@priangantv.com</p>
+            <h1>HARIAN UMUM KABAR PRIANGAN</h1>
+            <p>Jl. Dr. Sukarjo No.70, Tawangsari, Kec. Tawang, Kab. Tasikmalaya, Jawa Barat 46112</p>
+            <p>Telepon : Redaksi 0265-7525756, Iklan/Sirkulasi 0265-335300 | hukabarpriangan@gmail.com</p>
         </div>
 
         <div class="info-section">
@@ -226,7 +226,7 @@
                 <tr>
                     <th style="width: 5%">No</th>
                     <th style="width: 45%">Deskripsi</th>
-                    <th class="text-center" style="width: 15%">Harga Satuan</th>
+                    <th class="text-center" style="width: 15%">Harga</th>
                     <th class="text-center" style="width: 10%">Total Muat</th>
                     <th class="text-right" style="width: 25%">Total (Rp)</th>
                 </tr>

@@ -15,8 +15,7 @@
                         <div>
                             <a href="{{ route('transaksipriangan.create') }}"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
-                                <i class="fi fi-sr-square-plus p-"
-                                title="Tambah Data"></i></a>
+                                <i class="fi fi-sr-square-plus p-" title="Tambah Data"></i></a>
                         </div>
                     </div>
 
@@ -160,7 +159,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block mb-1 text-sm font-medium">Nama Pemasang</label>
-                            <input type="text" id="edit_nama_pemasangpriangan" name="nama_pemasangpriangan" required
+                            <input type="text" id="edit_nama_pemasangpriangan" name="nama_pemasangpriangan"
+                                required
                                 class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                         <div>
@@ -304,17 +304,46 @@
     }
 
     // --- Delete Logic ---
-    const transaksiprianganDelete = async (id, nofaktur) => {
-        if (confirm(`Hapus transaksi ${nofaktur}?`)) {
-            try {
-                await axios.post(`/transaksipriangan/${id}`, {
-                    '_method': 'DELETE',
-                    '_token': document.querySelector('meta[name="csrf-token"]').content
-                });
-                location.reload();
-            } catch (error) {
-                alert('Gagal menghapus data.');
+    const transaksiprianganDelete = async (id, nofakturpriangan) => {
+        // Tampilkan SweetAlert Konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: `Data faktur ${nofakturpriangan} akan dihapus permanen!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Warna merah untuk tombol hapus
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then(async (result) => {
+            // Jika user klik tombol "Ya, Hapus!"
+            if (result.isConfirmed) {
+                try {
+                    // Panggil Axios Delete
+                    const response = await axios.post(`/transaksipriangan/${id}`, {
+                        '_method': 'DELETE',
+                        '_token': document.querySelector('meta[name="csrf-token"]').content
+                    });
+
+                    // Jika sukses, munculkan pesan Sukses lalu reload
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+
+                } catch (error) {
+                    // Jika gagal
+                    Swal.fire(
+                        'Gagal!',
+                        'Terjadi kesalahan saat menghapus data.',
+                        'error'
+                    );
+                    console.error(error);
+                }
             }
-        }
+        });
     };
 </script>
