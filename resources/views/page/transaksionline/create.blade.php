@@ -4,34 +4,32 @@
             {{ __('TRANSAKSI KABAR PRIANGAN ONLINE') }}
         </h2>
     </x-slot>
-
     <div class="py-10">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
-
-                <div class="border-b pb-4 mb-6">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white uppercase">Form Input Transaksi Online
-                    </h3>
-                    <p class="text-sm text-gray-500">Silakan isi data transaksi dengan lengkap dan benar.</p>
-                </div>
-
-                @if ($errors->any())
-                    <div class="p-4 mb-6 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 border border-red-200"
-                        role="alert">
-                        <strong class="font-bold block mb-1">Terjadi Kesalahan!</strong>
-                        <ul class="list-disc list-inside">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+            <form class="space-y-6" method="POST" action="{{ route('transaksionline.store') }}">
+                @csrf
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
+                    <div class="border-b pb-4 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white uppercase">Form Input Transaksi Online
+                        </h3>
+                        <p class="text-sm text-gray-500">Silakan isi data transaksi dengan lengkap dan benar.</p>
                     </div>
-                @endif
 
-                <form class="space-y-6 bg-" method="POST" action="{{ route('transaksionline.store') }}">
-                    @csrf
+                    @if ($errors->any())
+                        <div class="p-4 mb-6 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 border border-red-200"
+                            role="alert">
+                            <strong class="font-bold block mb-1">Terjadi Kesalahan!</strong>
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
+
                             <div>
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">No
                                     Faktur</label>
@@ -53,9 +51,11 @@
                                 <input type="text" name="sales_iklanonline" required placeholder="Nama Sales"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                             </div>
+
                         </div>
 
                         <div class="space-y-4">
+
                             <div>
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Tanggal
                                     Transaksi</label>
@@ -63,18 +63,23 @@
                                     value="{{ date('Y-m-d') }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                             </div>
+
                             <div>
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Alamat
                                     Pemasang</label>
                                 <textarea name="alamat_pemasangonline" rows="5" required placeholder="Alamat lengkap..."
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
                             </div>
+
                         </div>
+
                     </div>
+                </div>
 
-                    <hr class="border-gray-200">
-
+                {{-- kolom 2 --}}
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
                         <div>
                             <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Jenis
                                 Iklan</label>
@@ -121,79 +126,85 @@
                                 min="1" required oninput="hitungSemua()"
                                 class="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
+
                     </div>
+                </div>
+                {{-- Kolom 3 --}}
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                        <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                            <h4 class="font-bold text-blue-800 mb-4">Rincian Pembayaran</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Harga
+                                        Satuan (Manual)</label>
+                                    <input type="text" id="harga_transaksionline" name="harga_transaksionline"
+                                        required onkeyup="formatInput(this)"
+                                        class="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                                        placeholder="Input Harga..." />
+                                </div>
 
-                    <hr class="border-gray-200">
+                                <div>
+                                    <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Diskon
+                                        (Rp)</label>
+                                    <input type="text" id="diskon_transaksionline" name="diskon_transaksionline"
+                                        value="0" required onkeyup="formatInput(this)"
+                                        class="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                                </div>
 
-                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                        <h4 class="font-bold text-blue-800 mb-4">Rincian Pembayaran</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Harga
-                                    Satuan (Manual)</label>
-                                <input type="text" id="harga_transaksionline" name="harga_transaksionline" required
-                                    onkeyup="formatInput(this)"
-                                    class="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="Input Harga..." />
-                            </div>
-
-                            <div>
-                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Diskon
-                                    (Rp)</label>
-                                <input type="text" id="diskon_transaksionline" name="diskon_transaksionline"
-                                    value="0" required onkeyup="formatInput(this)"
-                                    class="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
-                            </div>
-
-                            <div>
-                                <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Jumlah
-                                    Dibayar (DP)</label>
-                                <input type="text" id="jumlahbayar_transaksionline"
-                                    name="jumlahbayar_transaksionline" value="0" required
-                                    onkeyup="formatInput(this)"
-                                    class="bg-white border border-green-500 text-gray-900 text-lg font-bold rounded-lg block w-full p-2.5" />
+                                <div>
+                                    <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Jumlah
+                                        Dibayar (DP)</label>
+                                    <input type="text" id="jumlahbayar_transaksionline"
+                                        name="jumlahbayar_transaksionline" value="0" required
+                                        onkeyup="formatInput(this)"
+                                        class="bg-white border border-green-500 text-gray-900 text-lg font-bold rounded-lg block w-full p-2.5" />
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
+                </div>
+                {{-- Kolom 4 --}}
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
                         <div>
                             <label class="block mb-1 font-medium text-gray-500">Insentif (20%)</label>
                             <input type="text" id="insentif_transaksionline" name="insentif_transaksionline"
                                 readonly value="0"
                                 class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
                         </div>
+
                         <div>
                             <label class="block mb-1 font-medium text-gray-500">Komisi (20%)</label>
                             <input type="text" id="komisi_transaksionline" name="komisi_transaksionline" readonly
                                 value="0"
                                 class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
                         </div>
+
                         <div>
                             <label class="block mb-1 font-medium text-gray-500">PPN (11%)</label>
                             <input type="text" id="ppn_transaksionline" name="ppn_transaksionline" readonly
                                 value="0"
                                 class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
                         </div>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                         <div>
                             <label class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">TOTAL
                                 TAGIHAN</label>
                             <input type="text" id="totaltagihan_transaksionline"
                                 name="totaltagihan_transaksionline" readonly value="0"
-                                class="bg-gray-800 text-white text-2xl font-bold rounded-lg block w-full p-4 text-right" />
+                                class="bg-gray-800 border border-gray-300 text-white text-sm rounded-lg block w-full p-2.5" />
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-bold text-red-600 dark:text-white">SISA
                                 PIUTANG</label>
                             <input type="text" id="piutang_transaksionline" name="piutang_transaksionline"
                                 readonly value="0"
-                                class="bg-red-100 text-red-600 border border-red-300 text-2xl font-bold rounded-lg block w-full p-4 text-right" />
+                                class="bg-red-100 text-red-600 border border-red-300 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                     </div>
-
                     <div class="flex justify-end gap-3 pt-6 border-t mt-6">
                         <a href="{{ route('transaksionline.index') }}"
                             class="text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-8 py-2.5 text-center">
@@ -204,11 +215,10 @@
                             Simpan Transaksi
                         </button>
                     </div>
-                </form>
-            </div>
+                </div>
         </div>
+        </form>
     </div>
-
     <script>
         // 1. Helper Format Rupiah
         function formatRupiah(angka) {
