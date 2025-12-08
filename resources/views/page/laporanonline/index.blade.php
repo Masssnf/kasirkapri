@@ -1,17 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('LAPORAN TRANSAKSI IKLAN ONLINE') }}
+            {{ __('LAPORAN TRANSAKSI IKLAN ONLINE KABAR PRIANGAN') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <div class="p-4 bg-gray-100 mb-4 rounded-xl font-bold">
-                        CETAK LAPORAN TRANSAKSI
+                    <div class="p-4 bg-gray-100 mb-4 rounded-xl text-center font-bold">
+                        CETAK LAPORAN TRANSAKSI IKLAN KABAR PRIANGAN
                     </div>
 
                     <form class="w-full mx-auto my-5" method="POST" action="{{ route('laporanonline.store') }}"

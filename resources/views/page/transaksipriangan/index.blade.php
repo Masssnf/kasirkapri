@@ -7,11 +7,11 @@
 
     <div class="py-10">
         <div class="max-w-[95%] mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <div class="p-4 bg-gray-100 rounded-xl mb-4 font-bold flex items-center justify-between ">
-                        <div>DAFTAR TRANSAKSI</div>
+                        <div>DAFTAR TRANSAKSI IKLAN PRIANGAN TV</div>
                         <div>
                             <a href="{{ route('transaksipriangan.create') }}"
                                 class="bg-amber-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-amber-500 justify-between">
@@ -25,7 +25,7 @@
                         </div>
                     @endif
 
-                    <div class="relative overflow-x-auto">
+                    <div class="relative overflow-x-auto rounded-xl">
                         <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">

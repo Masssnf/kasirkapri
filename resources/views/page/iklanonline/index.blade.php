@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="gap-5 items-start flex">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
+                <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
                         FORM IKLAN KABAR PRIANGAN
                     </div>
@@ -41,12 +41,12 @@
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
-                    <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
+                <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
+                    <div class="p-4 text-center bg-gray-100 mb-2 rounded-xl font-bold">
                         TABEL DATA IKLAN KABAR PRIANGAN
                     </div>
                     <div>
-                        <div class="relative overflow-x-auto">
+                        <div class="relative overflow-x-auto rounded-xl">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
@@ -69,7 +69,7 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                              @foreach ($iklanonline as $key=> $i)
+                                @foreach ($iklanonline as $key=>$i)
                                 <tr class="text-black bg-white border-b dark:bg-gray-800 dark:border-gray-700 px-4"
                                     align="center">
                                     <th scope="row"
@@ -88,11 +88,13 @@
                                             onclick="editSourceModal(this)" data-modal-target="sourceModal"
                                             data-id="{{ $i->id }}"
                                             data-kode_iklanonline="{{ $i->kode_iklanonline }}"
-                                            data-jenis_iklanonline="{{ $i->jenis_iklanonline }}">
+                                            data-jenis_iklanonline="{{ $i->jenis_iklanonline }}"
+                                            title="Edit Data">
                                             <i class="fi fi-sr-file-edit"></i>
                                         </button>
                                         <button class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                            onclick="return iklanonlineDelete('{{ $i->id }}','{{ $i->kode_iklanonline }}')">
+                                            onclick="return iklanonlineDelete('{{ $i->id }}','{{ $i->kode_iklanonline }}')"
+                                            title="Hapus Data">
                                             <i class="fi fi-sr-delete-document"></i>
                                         </button>
                                     </td>

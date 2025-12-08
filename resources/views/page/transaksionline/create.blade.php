@@ -27,7 +27,7 @@
                     </div>
                 @endif
 
-                <form class="space-y-6" method="POST" action="{{ route('transaksionline.store') }}">
+                <form class="space-y-6 bg-" method="POST" action="{{ route('transaksionline.store') }}">
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="gap-5 items-start flex">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
+                <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-1/3 p-4">
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
                         FORM IKLAN PRIANGAN TV
                     </div>
@@ -40,12 +40,12 @@
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
-                    <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
+                <div class="bg-blue-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-4">
+                    <div class="p-4 text-center bg-gray-100 mb-2 rounded-xl font-bold">
                         TABEL DATA IKLAN PRIANGAN TV
                     </div>
                     <div>
-                        <div class="relative overflow-x-auto">
+                        <div class="relative overflow-x-auto rounded-xl">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
@@ -87,11 +87,13 @@
                                             onclick="editSourceModal(this)" data-modal-target="sourceModal"
                                             data-id="{{ $i->id }}"
                                             data-kode_iklanpriangan="{{ $i->kode_iklanpriangan }}"
-                                            data-jenis_iklanpriangan="{{ $i->jenis_iklanpriangan }}">
+                                            data-jenis_iklanpriangan="{{ $i->jenis_iklanpriangan }}"
+                                            title="Edit Data">
                                             <i class="fi fi-sr-file-edit"></i>
                                         </button>
                                         <button class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                            onclick="return iklanprianganDelete('{{ $i->id }}','{{ $i->kode_iklanpriangan }}')">
+                                            onclick="return iklanprianganDelete('{{ $i->id }}','{{ $i->kode_iklanpriangan }}')"
+                                            title="Hapus Data">
                                             <i class="fi fi-sr-delete-document"></i>
                                         </button>
                                     </td>
