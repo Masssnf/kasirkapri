@@ -59,12 +59,6 @@
                                 class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all">
                                 Login
                             </a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="px-6 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white font-medium transition">
-                                    Register
-                                </a>
-                            @endif
                         </div>
                     @endauth
                 </div>
