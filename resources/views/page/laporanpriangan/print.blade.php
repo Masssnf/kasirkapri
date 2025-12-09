@@ -14,40 +14,34 @@
             margin: 0;
             padding: 0;
             background-color: #FAFAFA;
-            font: 10pt "Tahoma";
-            /* Font diperkecil sedikit agar muat */
+            font: 9pt "Tahoma";
         }
 
         * {
             box-sizing: border-box;
-            -moz-box-sizing: border-box;
         }
 
         .page {
             width: 297mm;
-            /* A4 Landscape */
             min-height: 210mm;
             padding: 10mm;
             margin: 10mm auto;
             border: 1px #D3D3D3 solid;
-            border-radius: 5px;
             background: white;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9pt;
-            /* Ukuran font tabel */
+            font-size: 8pt;
         }
 
         th,
         td {
             border: 1px solid black;
-            padding: 5px;
-            vertical-align: top;
+            padding: 4px;
+            vertical-align: middle;
         }
 
         th {
@@ -64,25 +58,38 @@
             text-align: right;
         }
 
-        /* Header Laporan */
-        .header-laporan {
-            text-align: center;
+        /* HEADER STYLE (Disamakan dengan Online) */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
+            border-bottom: 3px double #333;
+            padding-bottom: 15px;
         }
 
-        .header-laporan h1 {
-            font-size: 16pt;
+        .logo-wrapper img {
+            height: 70px;
+            width: auto;
+            margin-right: 20px;
+        }
+
+        .header-text {
+            text-align: left;
+            color: #333;
+        }
+
+        .header-text h1 {
+            font-size: 18pt;
             font-weight: bold;
             margin: 0;
+            text-transform: uppercase;
         }
 
-        .header-laporan p {
+        .header-text p {
             margin: 2px 0;
-        }
-
-        @page {
-            size: A4 landscape;
-            margin: 0;
+            font-size: 10pt;
+            font-weight: bold;
         }
 
         @media print {
@@ -96,13 +103,9 @@
 
             .page {
                 margin: 0;
-                border: initial;
-                border-radius: initial;
-                width: initial;
-                min-height: initial;
-                box-shadow: initial;
-                background: initial;
-                padding: 10mm;
+                border: none;
+                box-shadow: none;
+                padding: 5mm;
             }
         }
     </style>
@@ -112,83 +115,129 @@
     <div class="book">
         <div class="page">
 
-            <div class="header-laporan">
-                <h1>PRIANGAN TV</h1>
-                <p>Jl. Dr. Sukarjo No.70, Tawangsari, Kec. Tawang,</p>
-                <p>Kota Tasikmalaya, Jawa Barat 46112</p>
-                <p>Telp: (0265) 123456 | Email: admin@priangantv.com</p>
-                <p style="font-size: 9pt;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
+            {{-- HEADER LAPORAN --}}
+            <div class="header-container">
+                <div class="logo-wrapper">
+                    {{-- Pastikan file logo ada di public/images/logo.png --}}
+                    <img src="{{ asset('images/faviconremove.png') }}" alt="Logo Priangan TV">
+                </div>
+                <div class="header-text">
+                    <h1>PRIANGAN TV</h1>
+                    <p>Jl. Dr. Soekarjo Nomor 70 Kelurahan Tawangsari</p>
+                    <p>Kecamatan Tawang Kota Tasikmalaya Jawa Barat (HU.
+                        Kabar Priangan)</p>
+                    <p>Telp: 082260030311 | Email: priangantv2024@gmail.com</p>
+                    <p style="font-size: 9pt; font-weight: normal;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
+                </div>
             </div>
 
+            {{-- TABEL DATA --}}
             <div>
                 <table>
                     <thead>
                         <tr>
                             <th style="width: 30px;">NO</th>
                             <th>NO FAKTUR</th>
-                            <th>TGL TRANSAKSI</th>
-                            <th>PEMASANG</th>
-                            <th>ALAMAT</th>
+                            <th>TANGGAL TRANSAKSI</th>
+                            <th>NAMA PEMASANG</th>
                             <th>JENIS IKLAN</th>
-                            <th>TGL MUAT</th>
-                            <th>SALES</th>
-                            <th>HARGA</th>
-                            <th>DIBAYAR</th>
-                            <th>PIUTANG</th>
-                            <th>STATUS</th>
+                            <th>TANGGAL MUAT</th>
+                            {{-- KOLOM PERHITUNGAN --}}
+                            <th>NILAI</th>
+                            <th>PPN 11%</th>
+                            <th>DPP</th>
+                            <th>KOMISI (20%)</th>
+                            <th>INSENTIF (20%)</th>
+                            <th>PEMEROLEH</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $no = 1;
-                            $total_pendapatan = 0;
-                            $total_piutang = 0;
+                            // Variabel Grand Total
+                            $grand_nilai = 0;
+                            $grand_ppn = 0;
+                            $grand_dpp = 0;
+                            $grand_komisi = 0;
+                            $grand_insentif = 0;
                         @endphp
 
                         @foreach ($data as $t)
                             @php
-                                $total_pendapatan += $t->jumlahbayar_transaksipriangan;
-                                $total_piutang += $t->piutang_transaksipriangan;
+                                // --- LOGIKA PERHITUNGAN (Disamakan dengan Online) ---
+
+                                // 1. NILAI (Total Tagihan dari Database Priangan)
+                                $nilai = $t->harga_transaksipriangan;
+
+                                // 2. DPP (Back Calculation / Tax Inclusive)
+                                // Rumus: Nilai / 1.11
+                                $dpp = $nilai / 1.11;
+
+                                // 3. PPN
+                                // Rumus: Nilai - DPP
+                                $ppn = $nilai - $dpp;
+
+                                // 4. KOMISI (20% dari DPP)
+                                $komisi = $dpp * 0.2;
+
+                                // 5. INSENTIF (20% dari Sisa DPP setelah dikurangi Komisi)
+                                $sisa_untuk_insentif = $dpp - $komisi;
+                                $insentif = $sisa_untuk_insentif * 0.2;
+
+                                // --- Akumulasi Grand Total ---
+                                $grand_nilai += $nilai;
+                                $grand_ppn += $ppn;
+                                $grand_dpp += $dpp;
+                                $grand_komisi += $komisi;
+                                $grand_insentif += $insentif;
                             @endphp
+
                             <tr>
                                 <td class="tengah">{{ $no++ }}</td>
-                                <td class="tengah">{{ $t->nofakturpriangan }}</td>
+                                <TD>{{ $t->nofakturpriangan }}</TD>
                                 <td class="tengah">
                                     {{ \Carbon\Carbon::parse($t->tanggal_transaksipriangan)->format('d/m/Y') }}</td>
                                 <td>{{ $t->nama_pemasangpriangan }}</td>
-                                <td>{{ Str::limit($t->alamat_pemasangpriangan, 20) }}</td>
-                                <td class="tengah">{{ $t->iklanpriangan->jenis_iklanpriangan ?? '-' }}</td>
+                                <td class="tengah">{{ $t->iklanpriangan->jenis_iklanpriangan }}</td>
                                 <td class="tengah">
                                     {{ \Carbon\Carbon::parse($t->tanggal_muatiklanpriangan)->format('d/m/Y') }}</td>
-                                <td>{{ $t->sales_iklanpriangan }}</td>
+                                {{-- NILAI --}}
+                                <td class="kanan">Rp {{ number_format($nilai, 0, ',', '.') }}</td>
 
-                                <td class="kanan">Rp {{ number_format($t->harga_transaksipriangan, 0, ',', '.') }}</td>
-                                <td class="kanan">Rp
-                                    {{ number_format($t->jumlahbayar_transaksipriangan, 0, ',', '.') }}</td>
-                                <td class="kanan text-red-600">Rp
-                                    {{ number_format($t->piutang_transaksipriangan, 0, ',', '.') }}</td>
+                                {{-- PPN --}}
+                                <td class="kanan">Rp {{ number_format($ppn, 0, ',', '.') }}</td>
 
-                                <td class="tengah">
-                                    @if ($t->piutang_transaksipriangan > 0)
-                                        <span style="color: red; font-weight: bold;">BELUM</span>
-                                    @else
-                                        <span style="color: green; font-weight: bold;">LUNAS</span>
-                                    @endif
+                                {{-- DPP --}}
+                                <td class="kanan" style="background-color: #fdfdfd; font-weight:bold;">
+                                    Rp {{ number_format($dpp, 0, ',', '.') }}
                                 </td>
+
+                                {{-- KOMISI --}}
+                                <td class="kanan">Rp {{ number_format($komisi, 0, ',', '.') }}</td>
+
+                                {{-- INSENTIF --}}
+                                <td class="kanan">Rp {{ number_format($insentif, 0, ',', '.') }}</td>
+
+                                <td class="tengah">{{ $t->sales_iklanpriangan }}</td>
                             </tr>
                         @endforeach
 
+                        {{-- FOOTER TOTAL --}}
                         <tr style="font-weight: bold; background-color: #f9f9f9;">
-                            <td colspan="9" class="kanan">TOTAL PENDAPATAN (Uang Masuk)</td>
-                            <td class="kanan">Rp {{ number_format($total_pendapatan, 0, ',', '.') }}</td>
-                            <td class="kanan" style="color: red;">Rp {{ number_format($total_piutang, 0, ',', '.') }}
-                            </td>
+                            <td colspan="6" class="kanan">TOTAL KESELURUHAN</td>
+
+                            <td class="kanan">Rp {{ number_format($grand_nilai, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_ppn, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_dpp, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_komisi, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_insentif, 0, ',', '.') }}</td>
                             <td></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
+            {{-- TANDA TANGAN --}}
             <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
                 <div style="text-align: center; width: 200px;">
                     <p>Tasikmalaya, {{ date('d F Y') }}</p>
@@ -201,7 +250,6 @@
     </div>
 
     <script>
-        // Otomatis print saat dibuka
         window.print();
     </script>
 </body>

@@ -8,6 +8,7 @@
     <title>Laporan Transaksi Kabar Priangan Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* ... Style sama seperti sebelumnya ... */
         body {
             width: 100%;
             height: 100%;
@@ -23,7 +24,6 @@
 
         .page {
             width: 297mm;
-            /* A4 Landscape */
             min-height: 210mm;
             padding: 10mm;
             margin: 10mm auto;
@@ -59,31 +59,23 @@
             text-align: right;
         }
 
-        /* --- GAYA BARU UNTUK HEADER DENGAN LOGO --- */
         .header-container {
             display: flex;
             align-items: center;
-            /* Posisi vertikal sejajar tengah */
             justify-content: center;
-            /* Posisi horizontal di tengah halaman */
             margin-bottom: 20px;
             border-bottom: 3px double #333;
-            /* Garis pemisah di bawah kop */
             padding-bottom: 15px;
         }
 
         .logo-wrapper img {
             height: 70px;
-            /* ATUR TINGGI LOGO DI SINI */
             width: auto;
-            /* Lebar menyesuaikan proporsi */
             margin-right: 20px;
-            /* Jarak antara logo dan teks */
         }
 
         .header-text {
             text-align: left;
-            /* Teks rata kiri terhadap logo */
             color: #333;
         }
 
@@ -99,9 +91,6 @@
             font-size: 10pt;
             font-weight: bold;
         }
-
-        /* ---------------------------------------- */
-
 
         @media print {
 
@@ -126,18 +115,21 @@
     <div class="book">
         <div class="page">
 
+            {{-- HEADER --}}
             <div class="header-container">
                 <div class="logo-wrapper">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo Kabar Priangan">
                 </div>
-
                 <div class="header-text">
                     <h1>HARIAN UMUM KABAR PRIANGAN</h1>
-                    <p>Jl. Raya Priangan No. 123, Jawa Barat, Indonesia</p>
-                    <p>Telp: (021) 123-4567 | Email: finance@priangantv.com</p>
+                    <p>Jl. Dr. Sukarjo No.70, Tawangsari, Kec, Tawang, Kota Tasikmalaya</p>
+                    <p>Telepon : Redaksi 0265-7525756, Iklan/Sirkulasi 0265-335300</p>
+                    <p>Email : hukabarpriangan@gmail.com </p>
                     <p style="font-size: 9pt; font-weight: normal;">Dicetak pada: {{ date('d-m-Y H:i') }}</p>
                 </div>
             </div>
+
+            {{-- TABEL --}}
             <div>
                 <table>
                     <thead>
@@ -145,76 +137,110 @@
                             <th style="width: 20px;">NO</th>
                             <th>NO FAKTUR</th>
                             <th>TGL TRANSAKSI</th>
-                            <th>PEMASANG</th>
+                            <th>NAMA PEMASANG</th>
                             <th>JENIS IKLAN</th>
                             <th>TGL MUAT</th>
-                            <th>JML MUAT</th>
-                            <th>HARGA</th>
-                            <th>OMSET (Harga x Qty)</th>
-                            <th>PPN</th>
-                            <th>KOMISI</th>
-                            <th>INSENTIF</th>
-                            <th>SALES</th>
+                            {{-- Sesuaikan urutan kolom agar mirip gambar --}}
+                            {{-- <th>HARGA</th> --}}
+                            <th>NILAI</th>
+                            <th>PPN 11%</th>
+                            <th>DPP</th>
+                            <th>KOMISI (20%)</th>
+                            <th>INSENTIF (20%)</th>
+                            <th>PEMEROLEH</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $no = 1;
-                            // Inisialisasi Variabel Penampung Total
                             $grand_harga = 0;
-                            $grand_omset = 0;
+                            $grand_nilai = 0;
                             $grand_ppn = 0;
+                            $grand_dpp = 0;
                             $grand_komisi = 0;
                             $grand_insentif = 0;
                         @endphp
 
                         @foreach ($data as $t)
                             @php
-                                // Hitung Qty & Omset
-                                $qty = $t->total_muatiklanonline > 0 ? $t->total_muatiklanonline : 1;
-                                $omset = $t->harga_transaksionline * $qty;
+                                // 1. NILAI (Total Tagihan dari Database yang sudah include PPN)
+                                // Asumsi: totaltagihan_transaksionline adalah angka 300.000
+                                $nilai= $t->harga_transaksionline;
+                                // $nilai = $t->totaltagihan_transaksionline;
+                                // $harga = $t->harga_transaksionline;
 
-                                // Akumulasi ke Grand Total
-                                $grand_harga += $t->harga_transaksionline;
-                                $grand_omset += $omset;
-                                $grand_ppn += $t->ppn_transaksionline;
-                                $grand_komisi += $t->komisi_transaksionline;
-                                $grand_insentif += $t->insentif_transaksionline;
+                                // 2. DPP (Back Calculation)
+                                // Logika Gambar: 300.000 / 1.11 = 269.696,97
+                                $dpp = $nilai / 1.11;
+
+                                // 3. PPN
+                                // Logika Gambar: 300.000 - 269.696,97 = 30.303,03
+                                $ppn = $nilai - $dpp;
+
+                                // 4. KOMISI
+                                // Logika Gambar: 20% DARI DPP (Bukan dari Nilai)
+                                // 269.696,97 * 0.2 = 53.939,39
+                                $komisi = $dpp * 0.2;
+
+                                // 5. INSENTIF
+                                // Logika Gambar: 20% DARI (DPP - KOMISI)
+                                // (269.696,97 - 53.939,39) * 0.2 = 43.151,52
+                                $sisa_untuk_insentif = $dpp - $komisi;
+                                $insentif = $sisa_untuk_insentif * 0.2;
+
+                                // --- Akumulasi Grand Total ---
+                                // $grand_harga += $harga;
+                                $grand_nilai += $nilai;
+                                $grand_ppn += $ppn;
+                                $grand_dpp += $dpp;
+                                $grand_komisi += $komisi;
+                                $grand_insentif += $insentif;
                             @endphp
 
                             <tr>
                                 <td class="tengah">{{ $no++ }}</td>
-                                <td class="tengah">{{ $t->nofakturonline }}</td>
+                                <td> {{ $t->nofakturonline }}</td>
                                 <td class="tengah">
                                     {{ \Carbon\Carbon::parse($t->tanggal_transaksionline)->format('d/m/Y') }}</td>
                                 <td>{{ $t->nama_pemasangonline }}</td>
                                 <td class="tengah">{{ $t->iklanonline->jenis_iklanonline ?? '-' }}</td>
                                 <td class="tengah">
                                     {{ \Carbon\Carbon::parse($t->tanggal_muatiklanonline)->format('d/m/Y') }}</td>
-                                <td class="tengah">{{ $qty }}</td>
 
-                                <td class="kanan">Rp {{ number_format($t->harga_transaksionline, 0, ',', '.') }}</td>
+                                {{-- <td class="kanan">Rp {{ number_format($harga, 0, ',', '.') }}</td> --}}
 
-                                <td class="kanan">Rp {{ number_format($omset, 0, ',', '.') }}</td>
+                                {{-- NILAI --}}
+                                <td class="kanan">Rp {{ number_format($nilai, 0, ',', '.') }}</td>
 
-                                <td class="kanan">Rp {{ number_format($t->ppn_transaksionline, 0, ',', '.') }}</td>
-                                <td class="kanan">Rp {{ number_format($t->komisi_transaksionline, 0, ',', '.') }}</td>
-                                <td class="kanan">Rp {{ number_format($t->insentif_transaksionline, 0, ',', '.') }}
+                                {{-- PPN --}}
+                                <td class="kanan">Rp {{ number_format($ppn, 0, ',', '.') }}</td>
+
+
+                                {{-- DPP --}}
+                                <td class="kanan">
+                                    Rp {{ number_format($dpp, 0, ',', '.') }}
                                 </td>
+
+                                {{-- KOMISI --}}
+                                <td class="kanan">Rp {{ number_format($komisi, 0, ',', '.') }}</td>
+
+                                {{-- INSENTIF --}}
+                                <td class="kanan">Rp {{ number_format($insentif, 0, ',', '.') }}</td>
+
                                 <td class="tengah">{{ $t->sales_iklanonline }}</td>
                             </tr>
                         @endforeach
 
+                        {{-- TOTAL FOOTER --}}
                         <tr style="font-weight: bold; background-color: #f9f9f9;">
-                            <td colspan="7" class="kanan">TOTAL KESELURUHAN</td>
+                            <td colspan="6" class="kanan">TOTAL KESELURUHAN</td>
 
-                            <td class="kanan">Rp {{ number_format($grand_harga, 0, ',', '.') }}</td>
-
-                            <td class="kanan">Rp {{ number_format($grand_omset, 0, ',', '.') }}</td>
-
+                            {{-- <td class="kanan">Rp {{ number_format($grand_harga, 0, ',', '.') }}</td> --}}
+                            <td class="kanan">Rp {{ number_format($grand_nilai, 0, ',', '.') }}</td>
                             <td class="kanan">Rp {{ number_format($grand_ppn, 0, ',', '.') }}</td>
+                            <td class="kanan">Rp {{ number_format($grand_dpp, 0, ',', '.') }}</td>
                             <td class="kanan">Rp {{ number_format($grand_komisi, 0, ',', '.') }}</td>
-                            <td class="kanan">Rp {{ number_format($grand_insentif, 0, ',', '.') }}</td>
+                            <td class="kanan" colspan="1">Rp {{ number_format($grand_insentif, 0, ',', '.') }}</td>
                             <td></td>
                         </tr>
                     </tbody>

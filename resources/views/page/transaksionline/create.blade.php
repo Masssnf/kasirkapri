@@ -160,7 +160,7 @@
                                         onkeyup="formatInput(this)"
                                         class="bg-white border border-green-500 text-gray-900 text-lg font-bold rounded-lg block w-full p-2.5" />
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -187,6 +187,12 @@
                             <label class="block mb-1 font-medium text-gray-500">PPN (11%)</label>
                             <input type="text" id="ppn_transaksionline" name="ppn_transaksionline" readonly
                                 value="0"
+                                class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
+                        </div>
+
+                        <div>
+                            <label class="block mb-1 font-medium text-gray-500">DPP</label>
+                            <input type="text" id="dpp_transaksionline" readonly value="0"
                                 class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
                         </div>
 
@@ -242,53 +248,70 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Ambil Element
             const selectJenis = document.getElementById('id_iklanonline');
-
             const inputTotalMuat = document.getElementById('total_muatiklanonline');
             const inputHarga = document.getElementById('harga_transaksionline');
             const inputDiskon = document.getElementById('diskon_transaksionline');
             const inputBayar = document.getElementById('jumlahbayar_transaksionline');
 
+            // Output Elements
+            const inputDPP = document.getElementById('dpp_transaksionline');
+            const inputPPN = document.getElementById('ppn_transaksionline');
             const inputInsentif = document.getElementById('insentif_transaksionline');
             const inputKomisi = document.getElementById('komisi_transaksionline');
-            const inputPPN = document.getElementById('ppn_transaksionline');
             const inputTotal = document.getElementById('totaltagihan_transaksionline');
             const inputPiutang = document.getElementById('piutang_transaksionline');
 
-            // Event: Pilih Jenis Iklan (Autofill Harga)
+            // Event: Pilih Jenis Iklan
             selectJenis.addEventListener('change', function() {
                 const selectedOption = this.options[this.selectedIndex];
                 const hargaDb = parseFloat(selectedOption.dataset.harga) || 0;
-
                 inputHarga.value = formatRupiah(hargaDb);
                 hitungSemua();
             });
 
-            // LOGIKA HITUNGAN UTAMA
+            // LOGIKA PERHITUNGAN
             window.hitungSemua = function() {
+                // 1. Ambil Nilai Input
                 const harga = cleanNumber(inputHarga.value);
                 const diskon = cleanNumber(inputDiskon.value);
                 const bayar = cleanNumber(inputBayar.value);
                 let qty = parseFloat(inputTotalMuat.value) || 1;
 
-                // Hitung
-                const totalOmset = harga * qty;
-                const insentif = totalOmset * 0.20;
-                const komisi = totalOmset * 0.20;
+                // 2. Hitung Total Tagihan (Omset Bersih)
+                // Ini adalah nilai kontrak yang sudah termasuk PPN
+                const omsetKotor = harga * qty;
+                let totalTagihan = omsetKotor - diskon;
+                if (totalTagihan < 0) totalTagihan = 0;
 
-                let subtotal = totalOmset - diskon;
-                if (subtotal < 0) subtotal = 0;
+                // 3. Hitung DPP dan PPN dari Total Tagihan
+                // Rumus Matematika: Nilai / 1.11 = DPP Murni
+                let dpp = totalTagihan / 1.11;
 
-                const ppn = subtotal * 0.11;
-                const totalTagihan = subtotal + ppn;
+                // PPN adalah selisihnya
+                let ppn = totalTagihan - dpp;
 
+                // (Opsional) Jika ingin memastikan DPP = Tagihan - PPN secara harfiah di kode:
+                // let ppn = totalTagihan - (totalTagihan / 1.11);
+                // let dpp = totalTagihan - ppn; 
+                // Hasilnya sama saja secara matematika.
+
+                // 4. Hitung Variabel Lain (Insentif & Komisi dari Omset Kotor)
+                const insentif = omsetKotor * 0.20;
+                const komisi = omsetKotor * 0.20;
+
+                // 5. Hitung Sisa Piutang
                 let piutang = totalTagihan - bayar;
-                if (piutang < 0) piutang = 0;
+                // if (piutang < 0) piutang = 0; // Aktifkan jika tidak boleh minus
 
-                // Tampilkan
+                // --- TAMPILKAN HASIL ---
+                // Gunakan Math.round agar tidak ada koma desimal panjang
+                inputTotal.value = formatRupiah(Math.round(totalTagihan));
+
+                inputPPN.value = formatRupiah(Math.round(ppn));
+                inputDPP.value = formatRupiah(Math.round(dpp)); // DPP = Total - PPN
+
                 inputInsentif.value = formatRupiah(Math.round(insentif));
                 inputKomisi.value = formatRupiah(Math.round(komisi));
-                inputPPN.value = formatRupiah(Math.round(ppn));
-                inputTotal.value = formatRupiah(Math.round(totalTagihan));
                 inputPiutang.value = formatRupiah(Math.round(piutang));
             }
         });

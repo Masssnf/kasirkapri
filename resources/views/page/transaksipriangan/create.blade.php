@@ -8,9 +8,10 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <form class="space-y-6" method="POST" action="{{ route('transaksipriangan.store') }}">
                 @csrf
+                {{-- BAGIAN 1: INFO UTAMA --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
                     <div class="border-b pb-4 mb-6">
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white uppercase">Form Input Transaksi Online
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white uppercase">Form Input Transaksi Priangan TV
                         </h3>
                         <p class="text-sm text-gray-500">Silakan isi data transaksi dengan lengkap dan benar.</p>
                     </div>
@@ -33,7 +34,7 @@
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">No
                                     Faktur</label>
                                 <input type="text" name="nofakturpriangan"
-                                    value="{{ $nofakturpriangan ?? 'TRX-ONL-001' }}" readonly
+                                    value="{{ $nofakturpriangan ?? 'TRX-PRG-001' }}" readonly
                                     class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                             </div>
                             <div>
@@ -67,6 +68,7 @@
                     </div>
                 </div>
 
+                {{-- BAGIAN 2: JENIS IKLAN --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -88,14 +90,14 @@
                             <input type="date" name="tanggal_muatiklanpriangan" required
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
-
                     </div>
                 </div>
 
+                {{-- BAGIAN 3: INPUT PEMBAYARAN --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
                     <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
                         <h4 class="font-bold text-blue-800 mb-4">Rincian Pembayaran</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Harga
                                     (Manual)</label>
@@ -125,24 +127,58 @@
                     </div>
                 </div>
 
+                {{-- BAGIAN 4: RINCIAN KALKULASI & TOTAL --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full p-6">
-                    <input type="hidden" id="ppn_transaksipriangan" name="ppn_transaksipriangan" value="0">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                        {{-- DPP (Display Only) --}}
+                        <div>
+                            <label class="block mb-1 font-medium text-gray-500">DPP (Nilai / 1.11)</label>
+                            <input type="text" id="dpp_transaksipriangan" readonly value="0"
+                                class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
+                        </div>
+
+                        {{-- PPN --}}
+                        <div>
+                            <label class="block mb-1 font-medium text-gray-500">PPN (11%)</label>
+                            <input type="text" id="ppn_transaksipriangan" name="ppn_transaksipriangan" readonly
+                                value="0"
+                                class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
+                        </div>
+
+                        {{-- Komisi (Display Only) --}}
+                        <div>
+                            <label class="block mb-1 font-medium text-gray-500">Komisi (20% x DPP)</label>
+                            <input type="text" id="komisi_transaksipriangan" readonly value="0"
+                                class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
+                        </div>
+
+                        {{-- Insentif (Display Only) --}}
+                        <div>
+                            <label class="block mb-1 font-medium text-gray-500">Insentif (20% x Sisa)</label>
+                            <input type="text" id="insentif_transaksipriangan" readonly value="0"
+                                class="bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded block w-full p-2" />
+                        </div>
+
+                        {{-- TOTAL TAGIHAN --}}
                         <div>
                             <label class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">TOTAL
                                 TAGIHAN</label>
                             <input type="text" id="totaltagihan_transaksipriangan"
                                 name="totaltagihan_transaksipriangan" readonly value="0"
-                                class="bg-gray-800 text-white text-2xl font-bold rounded-lg block w-full p-4 text-right" />
+                                class="bg-gray-800 border border-gray-300 text-white text-sm rounded-lg block w-full p-2.5" />
                         </div>
+
+                        {{-- SISA PIUTANG --}}
                         <div>
                             <label class="block mb-2 text-sm font-bold text-red-600 dark:text-white">SISA
                                 PIUTANG</label>
                             <input type="text" id="piutang_transaksipriangan" name="piutang_transaksipriangan"
                                 readonly value="0"
-                                class="bg-red-100 text-red-600 border border-red-300 text-2xl font-bold rounded-lg block w-full p-4 text-right" />
+                                class="bg-red-100 text-red-600 border border-red-300 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                     </div>
+
                     <div class="flex justify-end gap-3 pt-6 border-t mt-6">
                         <a href="{{ route('transaksipriangan.index') }}"
                             class="text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-8 py-2.5 text-center">
@@ -175,12 +211,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // INPUTS
             const selectJenis = document.getElementById('id_iklanpriangan');
             const inputHarga = document.getElementById('harga_transaksipriangan');
             const inputDiskon = document.getElementById('diskon_transaksipriangan');
             const inputBayar = document.getElementById('jumlahbayar_transaksipriangan');
 
+            // OUTPUTS
+            const inputDPP = document.getElementById('dpp_transaksipriangan'); // Baru
             const inputPPN = document.getElementById('ppn_transaksipriangan');
+            const inputKomisi = document.getElementById('komisi_transaksipriangan'); // Baru
+            const inputInsentif = document.getElementById('insentif_transaksipriangan'); // Baru
             const inputTotal = document.getElementById('totaltagihan_transaksipriangan');
             const inputPiutang = document.getElementById('piutang_transaksipriangan');
 
@@ -193,32 +234,43 @@
                 hitungSemua();
             });
 
-            // LOGIKA HITUNGAN (Tanpa Perkalian Qty)
+            // --- LOGIKA HITUNGAN BARU (SESUAI GAMBAR/LAPORAN) ---
             window.hitungSemua = function() {
-                // 1. Ambil Angka Bersih
+                // 1. Ambil Angka Bersih dari Input
                 const harga = cleanNumber(inputHarga.value);
                 const diskon = cleanNumber(inputDiskon.value);
                 const bayar = cleanNumber(inputBayar.value);
 
-                // 2. Total Omset = Harga itu sendiri (karena tidak ada qty)
-                const totalOmset = harga;
+                // 2. Hitung Total Tagihan (Omset Gross)
+                // Rumus: Harga - Diskon
+                let totalTagihan = harga - diskon;
+                if (totalTagihan < 0) totalTagihan = 0;
 
-                // 3. Hitung Dasar (Total - Diskon)
-                let subtotal = totalOmset - diskon;
-                if (subtotal < 0) subtotal = 0;
+                // 3. Hitung DPP (Back Calculation dari Total Tagihan)
+                // Rumus: Total Tagihan / 1.11
+                let dpp = totalTagihan / 1.11;
 
                 // 4. Hitung PPN (11%)
-                const ppn = subtotal * 0.11;
+                // Rumus: Total Tagihan - DPP
+                let ppn = totalTagihan - dpp;
 
-                // 5. Total Tagihan Akhir
-                const totalTagihan = subtotal + ppn;
+                // 5. Hitung Komisi (20% dari DPP)
+                let komisi = dpp * 0.20;
 
-                // 6. Hitung Sisa Piutang
+                // 6. Hitung Insentif (20% dari (DPP - Komisi))
+                let sisaUntukInsentif = dpp - komisi;
+                let insentif = sisaUntukInsentif * 0.20;
+
+                // 7. Hitung Sisa Piutang
                 let piutang = totalTagihan - bayar;
-                if (piutang < 0) piutang = 0;
+                // if (piutang < 0) piutang = 0; // Opsional: cegah minus
 
-                // 7. Tampilkan
+                // --- TAMPILKAN HASIL ---
+                inputDPP.value = formatRupiah(Math.round(dpp));
                 inputPPN.value = formatRupiah(Math.round(ppn));
+                inputKomisi.value = formatRupiah(Math.round(komisi));
+                inputInsentif.value = formatRupiah(Math.round(insentif));
+                
                 inputTotal.value = formatRupiah(Math.round(totalTagihan));
                 inputPiutang.value = formatRupiah(Math.round(piutang));
             }
